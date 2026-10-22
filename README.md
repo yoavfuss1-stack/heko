@@ -21,3 +21,10 @@
 ```
 node tools/build_templates.js
 ```
+
+## טופס אוטומטי
+דף אינטרנט שבו ממלאים את פרטי הלקוח והמחיר, רואים את ההצעה מתעדכנת, ומורידים קובץ Word מוכן:
+https://claude.ai/artifact/23xuZvs9MihPCT114gwvzE
+
+הקוד נמצא ב-`tools/quote-form`: `quote-core.js` (נוסח ההצעה ובניית הקובץ), `page.html` (הטופס).
+אחרי שינוי מריצים `python3 tools/quote-form/build.py` כדי ליצור מחדש את `index.html`.

@@ -1,0 +1,808 @@
+<title>הצעות מחיר Orit Lev</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+<style>
+/* Layout: form column on the right (RTL) + live paper preview; stacks on phones */
+:root {
+  --bg: #ECEAE7; --panel: #FFFFFF; --ink: #2A2624; --muted: #776E68; --line: #DCD6D1;
+  --accent: #6E625A; --accent-ink: #FFFFFF; --soft: #F4F1EE; --warn: #A4471F; --ok: #3F6F4E;
+  --paper: #FFFFFF; --paper-ink: #222222; --paper-muted: #8C8C8C; --paper-line: #C9C2BC; --paper-shade: #F3F0ED; --mark: #FFEF5C;
+  --f-body: "Assistant", "Segoe UI", Arial, sans-serif;
+  --f-display: "Frank Ruhl Libre", "David", Georgia, serif;
+  --f-doc: Arial, "Helvetica Neue", sans-serif;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1A1817; --panel: #242120; --ink: #EDE8E4; --muted: #A79E97; --line: #3A3532;
+  --accent: #CDBDB0; --accent-ink: #1A1817; --soft: #2C2826; --warn: #E8946C; --ok: #8CC59D; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #1A1817; --panel: #242120; --ink: #EDE8E4; --muted: #A79E97; --line: #3A3532;
+  --accent: #CDBDB0; --accent-ink: #1A1817; --soft: #2C2826; --warn: #E8946C; --ok: #8CC59D; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { direction: rtl; max-width: 1320px; margin: 0 auto; padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header.top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+header.top img { width: 44px; height: 44px; border-radius: 6px; }
+header.top h1 { font-family: var(--f-display); font-weight: 700; font-size: 1.6rem; margin: 0; text-wrap: balance; }
+header.top .sub { color: var(--muted); font-size: .9rem; }
+.brand { display: flex; align-items: center; gap: 12px; margin-inline-end: auto; }
+
+.types { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.types button { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--ink); padding: 7px 16px; border-radius: 999px; cursor: pointer; }
+.types button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.types button:focus-visible, .btn:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+.form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+fieldset { margin: 0; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); padding: 14px 16px 16px; display: grid; gap: 12px; min-width: 0; }
+legend { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; padding: 0 6px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+label.f { display: grid; gap: 4px; font-size: .88rem; color: var(--muted); font-weight: 600; min-width: 0; }
+input[type=text], textarea { font: inherit; color: var(--ink); background: var(--soft); border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; width: 100%; min-width: 0; }
+textarea { min-height: 64px; resize: vertical; }
+input.num { font-variant-numeric: tabular-nums; direction: ltr; text-align: right; }
+label.chk { display: flex; gap: 8px; align-items: flex-start; font-weight: 600; cursor: pointer; }
+label.chk input { margin-top: 4px; accent-color: var(--accent); width: 17px; height: 17px; }
+.hint { font-size: .82rem; color: var(--muted); margin: 0; }
+.example { font-size: .85rem; color: var(--muted); background: var(--panel); border: 1px dashed var(--line); border-radius: var(--r); padding: 10px 14px; margin: 0; }
+
+.pay { display: grid; gap: 8px; }
+.pay-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) 32px; gap: 6px; align-items: center; }
+.pay-row .x { font: inherit; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 7px; height: 36px; cursor: pointer; }
+.pay-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+.chip.ok { color: var(--ok); } .chip.warn { color: var(--warn); }
+
+.btn { font: inherit; font-weight: 700; border-radius: 8px; padding: 10px 18px; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.small { padding: 5px 12px; font-size: .88rem; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.actions { position: sticky; bottom: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 10px; box-shadow: 0 -6px 18px rgba(0,0,0,.06); }
+.actions .status { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.actions .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions .btns .primary { flex: 1; }
+.msg { font-size: .88rem; min-height: 1.2em; margin: 0; color: var(--muted); }
+.msg.err { color: var(--warn); } .msg.good { color: var(--ok); }
+
+/* ---- Paper preview (always light, like the printed document) ---- */
+.preview { min-width: 0; position: sticky; top: calc(12px + env(safe-area-inset-top, 0px)); }
+.preview .cap { font-size: .85rem; color: var(--muted); margin: 0 0 8px; }
+.paper { background: var(--paper); color: var(--paper-ink); font-family: var(--f-doc); font-size: 13.5px; line-height: 1.55; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 30px rgba(0,0,0,.08); padding: 28px clamp(18px, 5%, 56px) 22px; max-height: calc(100vh - 110px); overflow: auto; }
+@media (max-width: 900px) { .preview { position: static; } .paper { max-height: none; } }
+.p-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--paper-line); padding-bottom: 6px; margin-bottom: 18px; }
+.p-head span { color: #6E625A; letter-spacing: .12em; font-size: 12px; direction: ltr; }
+.p-head img { width: 38px; height: 38px; }
+.p-foot { border-top: 1px solid var(--paper-line); margin-top: 26px; padding-top: 6px; text-align: center; color: var(--paper-muted); font-size: 10.5px; direction: ltr; }
+.paper p { margin: 0 0 7px; }
+.paper mark { background: var(--mark); color: inherit; padding: 0 2px; }
+.q-meta { margin: 0 0 2px !important; } .q-meta.last { margin-bottom: 18px !important; }
+.q-title { font-size: 19px; color: #6E625A; text-align: center; margin: 0 0 18px; text-wrap: balance; font-weight: 700; }
+.q-sec { font-size: 15.5px; color: #6E625A; border-bottom: 1px solid var(--paper-line); padding-bottom: 3px; margin: 22px 0 9px; }
+.q-stage { font-size: 14px; margin: 14px 0 5px; }
+.q-note { font-style: italic; color: var(--paper-muted); font-size: 12px; }
+.q-price { padding-inline-start: 22px; margin-top: 4px !important; }
+.q-list { margin: 0 0 8px; padding-inline-start: 22px; }
+.q-list li { margin-bottom: 3px; } .q-list li::marker { color: #6E625A; }
+.q-list li.lvl1 { margin-inline-start: 26px; list-style-type: circle; }
+.q-num { margin: 0 0 8px; padding-inline-start: 24px; } .q-num li { margin-bottom: 5px; } .q-num li::marker { color: #6E625A; }
+.q-table-wrap { overflow-x: auto; margin: 6px 0; }
+.q-table { border-collapse: collapse; width: 100%; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.q-table th, .q-table td { border: 1px solid var(--paper-line); padding: 5px 8px; text-align: right; }
+.q-table th, .q-table tr.total td { background: var(--paper-shade); font-weight: 700; }
+.q-table td:first-child, .q-table th:first-child { text-align: center; width: 6%; }
+.q-sign { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; text-align: center; font-size: 12px; }
+.q-sign span { display: block; border-top: 1px solid var(--paper-muted); margin-bottom: 4px; }
+.q-sign-h { margin-top: 20px !important; }
+.q-close { margin-top: 18px !important; }
+.q-close b { color: #6E625A; }
+@media (prefers-reduced-motion: no-preference) { .types button, .btn { transition: background .15s, color .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <img id="logoTop" alt="">
+      <div>
+        <h1>הצעות מחיר</h1>
+        <div class="sub">Orit Lev Architect · ממלאים פרטים, מורידים קובץ Word מוכן</div>
+      </div>
+    </div>
+    <div class="types" role="group" aria-label="סוג ההצעה" id="types"></div>
+  </header>
+
+  <div class="grid">
+    <form class="form" id="form" autocomplete="off">
+      <p class="example" id="exampleNote">הערכים שמופיעים בהתחלה לקוחים מהצעה קודמת לדוגמה. מחליפים אותם בפרטי הלקוח הנוכחי.</p>
+      <div id="fields"></div>
+      <div class="actions">
+        <div class="status" id="status"></div>
+        <div class="btns">
+          <button type="button" class="btn primary" id="dl">הורדת קובץ Word</button>
+          <button type="button" class="btn" id="reset">איפוס</button>
+        </div>
+        <p class="msg" id="msg" role="status"></p>
+      </div>
+    </form>
+
+    <section class="preview" aria-label="תצוגה מקדימה">
+      <p class="cap">תצוגה מקדימה · מה שמסומן בצהוב עדיין חסר</p>
+      <div class="paper" dir="rtl">
+        <div class="p-head"><span>Orit Lev Architect</span><img id="logoDoc" alt=""></div>
+        <div id="doc"></div>
+        <div class="p-foot">Orit Lev Architect &nbsp;|&nbsp; Tel: 03.5100885 / 054.397.2392 &nbsp;|&nbsp; oritlev.arch@gmail.com</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/docx@9.7.1/dist/index.iife.js"></script>
+<script>
+// Quote builder shared by the web form (preview + Word download) and local tests.
+// Markup in strings:  **bold**   [[missing value – shown in yellow]]
+(function (root) {
+  const fmt = (n) => (Number(n) || 0).toLocaleString("en-US");
+  const num = (x) => Number(String(x).replace(/[^\d.]/g, "")) || 0;
+  const has = (x) => String(x ?? "").trim() !== "";
+  // value or a yellow "missing" marker
+  const v = (x, label) => (has(x) ? String(x).trim() : `[[${label}]]`);
+  const money = (x, label) => (has(x) && num(x) ? fmt(num(x)) : `[[${label}]]`);
+
+  const TYPES = {
+    tenant: "שינויי דיירים",
+    reno: "שיפוץ",
+    permit: "רישוי היתר",
+  };
+
+  const PAYMENTS = {
+    tenant: [
+      [20, "במעמד חתימת ההסכם ותחילת העבודה"],
+      [25, "עם אישור תוכנית ההעמדה הסופית (סיום שלב א')"],
+      [35, "עם מסירת סט תוכניות העבודה המלא לשינויי הדיירים (סיום שלב ב')"],
+      [15, "עם מסירת תוכניות הנגרות והמטבח הסופיות (סיום שלב ג')"],
+      [5, "עם סיום ביקורי הפיקוח העליון בשטח (סיום שלב ד')"],
+    ],
+    reno: [
+      [15, "מקדמה – עם חתימת ההסכם"],
+      [25, "גמר שלב א' – עם אישור חלופת התכנון הנבחרת"],
+      [35, "גמר שלב ב' – עם מסירת סט תוכניות העבודה לקבלן"],
+      [15, "גמר שלבים ג'+ד' – עם מסירת תוכניות הנגרות וסיום פגישות הבחירה"],
+      [10, "גמר שלב ה' – עם סיום התקנות הנגרות והפיקוח האחרון"],
+    ],
+    permit: [
+      [25, "בחתימת החוזה"],
+      [15, "לאחר קבלת תיק המידע ופתיחת הבקשה במערכת"],
+      [35, "בסיום דרישות בקרת התכן (הבקשה ממתינה לדיון בוועדה)"],
+      [20, "בסיום הגשת כל הנדרש לפי דרישות הוועדה"],
+      [5, "בקבלת היתר הבנייה"],
+    ],
+  };
+
+  function today() {
+    const d = new Date();
+    return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
+  }
+
+  // Example values come from real past quotes; the form marks them as examples.
+  function defaults(type) {
+    const common = {
+      type, date: today(), client: "", address: "", rate: "380", extraNotes: "",
+      payments: PAYMENTS[type].map(([pct, label]) => ({ pct: String(pct), label })),
+    };
+    if (type === "tenant") return {
+      ...common, sqm: "116", project: "נווה פארק, פתח תקווה",
+      baths: "חדר רחצה הורים, חדר רחצה כללי, שירותי אורחים",
+      carpentry: "2 ארונות כיור, 3 ארונות בגדים וקיר טלוויזיה בסלון",
+      renders: "2", visits: "2", mTiles: "2", mLight: "2", mKitchen: "2",
+      fee: "40000", walls: true, wallsFee: "4000",
+    };
+    if (type === "reno") return {
+      ...common, scope: "חדרי רחצה ומטבח", property: "בית מגורים",
+      measure: "חדרי הרחצה והמטבח", elev: "2 חדרי הרחצה ושירותי האורחים",
+      mTiles: "2", mKitchen: "2", mLight: "2", hours: "3", visits: "5",
+      p1: "6000", p2: "7000", p3: "5500", p4: "6000", p5: "5000",
+    };
+    return {
+      ...common, permitKind: "שינויים", building: "בית צמוד קרקע",
+      work: "תוספת מחסן וסגירת 2 פתחים בתקרת מפלס הקרקע",
+      gramOther: true, gramBy: "אדריכל עמוס טלמור",
+      existing: true, existingWhat: "תוספת המחסן", fee: "6000",
+    };
+  }
+
+  function total(s) {
+    if (s.type === "reno") return ["p1", "p2", "p3", "p4", "p5"].reduce((a, k) => a + num(s[k]), 0);
+    return num(s.fee);
+  }
+  const pctSum = (s) => s.payments.reduce((a, p) => a + num(p.pct), 0);
+
+  // ---------- Shared clauses ----------
+  const meetingsCommon = (rate) => [
+    "כל פגישת עבודה או ליווי (בזום או פרונטלית, לפי הצורך המקצועי) הינה עד 2.5 שעות, אלא אם צוין אחרת בהצעה.",
+    "פגישות הליווי באולמות תצוגה, אצל ספקים, חברות מטבחים ונגרים ייערכו ברדיוס של עד כ-20 ק\"מ ממשרד המתכננת.",
+    `בחירת ספקים ואולמות תצוגה מחוץ לאזור זה תתואם מראש בלבד, ותחויב בתוספת של ${rate} ₪ + מע\"מ לשעה, כולל זמן נסיעה.`,
+    "כל פגישה נוספת, או הגעה נוספת לאתר, מעבר למפורט בהצעה – תחויב לפי תעריף שעתי.",
+  ];
+  const EXCLUSIONS_DESIGN = [
+    "ליווי, ייעוץ, בחירה או רכישה של: ריהוט נייד (ספות, מיטות, פינות אוכל), גופי תאורה דקורטיביים, טקסטיל (וילונות, שטיחים), תמונות ואקססוריז (הלבשת הבית / סטיילינג).",
+    "הפקת הדמיות תלת-ממדיות פוטו-ריאליסטיות (ניתן להוסיף כשירות נפרד).",
+    "שכר יועצים מקצועיים, כגון: מודד, כמאי, מהנדס קונסטרוקציה, יועץ אינסטלציה, יועץ איטום, יועץ מיזוג או כל יועץ נוסף שיידרש – העלות על המזמין.",
+    "מדידה מקצועית של הנכס ע\"י מודד מוסמך (במידה ותידרש – העלות על המזמין).",
+    "תוכניות קונסטרוקציה, אישורי מהנדסים (למשל בפירוק קיר תומך / עמוד) או הגשות סטטוטוריות לעירייה / לרשויות.",
+    "תכנון נגרות מעבר לפריטים שהוגדרו בהצעה – כל פריט נוסף יתומחר בנפרד.",
+    "הדפסות ושליחתן – ישולמו ע\"י המזמין ישירות למכון ההעתקות.",
+  ];
+  const termsDesign = (rate) => [
+    `**סבבי תיקונים:** המחיר כולל עד 2 סבבי תיקונים לתוכניות בשלב הטיוטה. שינויים ותיקונים שיבקש המזמין לאחר אישור הסט הסופי וחתימתו – יחויבו לפי תעריף שעתי של ${rate} ₪ + מע\"מ.`,
+    "**אחריות ספקים, בדיקות ותיאומים בשטח:** האחריות לבדיקת הגעת המוצרים הנכונים לשטח, נוכחות בזמן לקיחת מידות ע\"י ספקים, בדיקת תקינות המוצרים שהגיעו וטיב ההתקנות והביצוע של הספקים והמבצעים – חלה על הקבלן המבצע בלבד. כנ\"ל לגבי תיאום לוחות הזמנים בין הספקים השונים והפיקוח על טיב עבודתם. הצעה זו **אינה כוללת** תיאומים לאספקת סחורה כלשהי, או נוכחות של האדריכלית באתר בזמן קבלת סחורה (לרבות הגעה לצורך \"פתיחת דלת\").",
+    "**פתיחת דלתות:** פתיחת הנכס והדלתות עבור ספקים, מתקינים ואנשי מקצוע תהיה באחריות הקבלן, המזמין או נציג מטעמו.",
+    "**גבולות אחריות התכנון:** אחריות האדריכלית הינה על עבודות התכנון והעיצוב בלבד ועל מציאת פתרונות הקשורים בעיצוב הנכס ותשתיותיו. הצעה זו **אינה כוללת** פיקוח בנייה צמוד או אחריות כלשהי על טיב העבודה של הגורם המבצע בשטח. פיקוח עליון אינו פיקוח צמוד, ואינו מחליף מנהל עבודה או מפקח בנייה מוסמך.",
+    "**אי-מתן אחריות על צדדים שלישיים:** המלצה על אנשי מקצוע, קבלנים או ספקים נעשית כמחווה מקצועית בלבד, ואינה כוללת אחריות או ערבות כלשהי לטיב עבודתם, לעמידתם בלוחות הזמנים או לאיכות המוצרים שלהם.",
+  ];
+  const TERMINATION = "**סיום התקשרות:** כל צד רשאי לסיים הסכם זה בכל עת, בהודעה בכתב של 14 יום מראש, ובלבד ששכר המתכננת שולם במלואו עד לאותו שלב, לרבות השלב/ים הנמצא/ים בתהליך ההכנה, על פי שלבי העבודה המתוארים לעיל.";
+  const PAY_TERMS = "התשלום יבוצע ע\"י המזמין תוך 3 ימי עסקים ממועד דרישת התשלום.";
+
+  const extraLines = (s) => String(s.extraNotes || "").split("\n").map((t) => t.trim()).filter(Boolean);
+
+  // ---------- Model: a flat list of blocks ----------
+  function model(s) {
+    const B = [];
+    let sec = 0;
+    const p = (text, o = {}) => B.push({ k: "p", text, ...o });
+    const section = (text) => B.push({ k: "section", text: `${++sec}. ${text}` });
+    const stage = (text) => B.push({ k: "stage", text });
+    const bullet = (text, level = 0) => B.push({ k: "bullet", text, level });
+    const numbered = (items) => B.push({ k: "num", items });
+    const note = (text) => B.push({ k: "note", text });
+    const price = (text) => B.push({ k: "price", text });
+    const rate = v(s.rate, "תעריף");
+    const T = total(s);
+
+    const payTable = () => {
+      const rows = s.payments.filter((r) => has(r.label) || has(r.pct));
+      const sum = pctSum(s);
+      B.push({
+        k: "table", widths: [700, 5338, 1300, 2300], totalRow: true,
+        rows: [
+          ["#", "אבן דרך לתשלום", "אחוז", "סכום (₪, לפני מע\"מ)"],
+          ...rows.map((r, i) => [String(i + 1), v(r.label, "אבן דרך"), `${num(r.pct)}%`,
+            T ? fmt(Math.round((T * num(r.pct)) / 100)) : "[[—]]"]),
+          ["", "סה\"כ", sum === 100 ? "100%" : `[[${sum}%]]`, T ? `${fmt(T)} ₪` : "[[סכום]]"],
+        ],
+      });
+      p(PAY_TERMS, { before: 160 });
+    };
+
+    B.push({ k: "meta", text: `תאריך: ${v(s.date, "תאריך")}` });
+    B.push({ k: "meta", text: `לכבוד: ${v(s.client, "שם הלקוח/ות")}` });
+    B.push({ k: "meta", text: `כתובת הנכס: ${v(s.address, "כתובת")}`, last: true });
+
+    if (s.type === "tenant") {
+      B.push({ k: "title", text: `הצעת מחיר – שינויי דיירים לדירת ${v(s.sqm, "גודל")} מ"ר בפרויקט ${v(s.project, "שם הפרויקט")}` });
+      p("תודה על פנייתכם.");
+      p("להלן הצעה לליווי אדריכלי ממוקד עבור דירתכם החדשה, תוך שימת דגש על אופטימיזציה של מערכות הבית, התאמת תשתיות הקבלן לצרכים הייחודיים שלכם, ותכנון נגרות ומטבח מותאמים אישית ברמה הגבוהה ביותר.");
+      section("תכולת העבודה ושלבי הפרויקט");
+      stage("שלב א': תכנון רעיוני ומערך העמדה");
+      bullet("פגישת פרוגרמה (הגדרת צרכים, תקציב וסגנון).");
+      bullet("פגישה עם מחלקת שינויי הדיירים לקבלת קבצים והנחיות (מקרא חשמל, תאורה וכו').");
+      bullet("הכנת עד 3 חלופות להעמדת ריהוט (תוכנית מערך דו-ממדית) על גבי תוכנית המחיצות הקיימת של הקבלן, עד לבחירת הסקיצה המתאימה ביותר עבורכם.");
+      stage("שלב ב': הפקת סט תוכניות עבודה לקבלן השינויים");
+      p("לאחר אישור תוכנית ההעמדה, יופק סט תוכניות עבודה מלא, מפורט ומקצועי למתאם שינויי הדיירים של חברת הבנייה:");
+      bullet(s.walls
+        ? "תוכנית הריסה ובנייה – על גבי מערך קירות הפנים המקורי של הקבלן (ראו \"תוספות אפשריות\" בהמשך)."
+        : "תוכנית הריסה ובנייה – על גבי מערך קירות הפנים המקורי של הקבלן.");
+      bullet("תוכנית אינסטלציה (מיקומי כלים סניטריים, נקודות מים וניקוז).");
+      bullet("תוכנית חשמל ותקשורת.");
+      bullet("תוכנית תקרה ותאורה (מיקומי מפסקים, נקודות מאור וסוגי הדלקות).");
+      bullet("תוכנית תקרות גבס, הנמכות ומיזוג אוויר (בהסתמך על התכנון הקיים).");
+      bullet("תוכנית ריצוף – בהתאם לאריחים שייבחרו לחלל הדירה ולמרפסת, כולל אומדן כמויות.");
+      bullet(`פריסות מפורטות לחדרי הרחצה (מיקומי ברזים, אינטרפוצים ופריסת אריחים), עבור: ${v(s.baths, "חדרי רחצה")}.`);
+      bullet(`**ליווי באולמות תצוגה:** עד ${v(s.mTiles, "מס'")} פגישות לבחירת ריצוף, חיפויים וכלים סניטריים.`);
+      stage("שלב ג': תכנון נגרות מותאמת אישית ומטבח");
+      p("הפקת תוכניות עבודה מפורטות (תוכנית, חזיתות, חתכים, חומרים עקרוניים ומידות) לצורך קבלת הצעות מחיר מנגרים וחברות מטבחים:");
+      bullet("תוכנית מטבח מלאה ומפורטת (כולל העמדת מכשירי חשמל ואינטגרציה, משטחים וחיפוי קיר).");
+      bullet("פגישת סנכרון ותיאום אחת מול חברת המטבחים / הנגר שנבחר.");
+      bullet(`תוכניות נגרות עבור: ${v(s.carpentry, "פריטי נגרות")} – עד 2 סקיצות לכל פריט.`);
+      if (num(s.renders)) bullet(`עד ${num(s.renders)} הדמיות גושניות נפחיות למטבח / לפריט נגרות נבחר / לחלל הדירה.`);
+      stage("שלב ד': פיקוח עליון");
+      bullet(`עד ${v(s.visits, "מס'")} ביקורים מוגדרים מראש של האדריכלית בדירה בנקודות מפתח, כגון: בדיקת סימון קירות ותשתיות בשטח, ובדיקה לפני סגירת קירות גבס / ריצוף.`);
+      bullet("עמידה בקשר מול מחלקת שינויי הדיירים בשלב התכנון, ומול הקבלן המבצע בשלב הביצוע.");
+
+      section("פגישות וליווי הכלולים בהצעה");
+      bullet("**פגישה 1 – פרוגרמה ואפיון צרכים:** הגדרת תקציב, סגנון עיצובי וצרכים פונקציונליים.");
+      bullet("**פגישה 2 – הצגת חלופות והעמדת ריהוט:** בחירת הסקיצה הסופית שתהווה בסיס לתוכניות התשתיות.");
+      bullet("**פגישה 3 – תכנון תשתיות:** תאורה, מיקומי שקעים, אינסטלציה ומיזוג אוויר.");
+      bullet("**פגישה 4 – תכנון נגרות ומטבח:** קביעת פונקציות וחלוקות פנימיות, על בסיס שיעורי בית שיקבל המזמין מראש.");
+      bullet("**פגישות ליווי באולמות תצוגה / ספקים:**");
+      bullet(`עד ${v(s.mTiles, "מס'")} פגישות לבחירת ריצוף, חיפויים וכלים סניטריים.`, 1);
+      bullet(`עד ${v(s.mLight, "מס'")} פגישות לבחירת תאורה.`, 1);
+      bullet(`עד ${v(s.mKitchen, "מס'")} פגישות עם חברת מטבחים / משטחים למטבח ולחדרי הרחצה.`, 1);
+      meetingsCommon(rate).forEach((t) => bullet(t));
+
+      section("ההצעה אינה כוללת");
+      EXCLUSIONS_DESIGN.forEach((t) => bullet(t));
+      section("הערות ותנאים כלליים");
+      numbered([...termsDesign(rate),
+        "**הגשה אחת לקבלן:** תוכניות השינויים מופקות ומסופקות לקבלן כסט אחד מרוכז וסופי. בקשה לשינויים ולהגשה נוספת / מעודכנת לאחר שהסט נמסר למתאם השינויים – תתומחר לפי תעריף שעתי.",
+        ...extraLines(s), TERMINATION]);
+
+      section("שכר טרחה ותנאי תשלום");
+      p(`סך שכר הטרחה עבור הליווי המלא (שלבים א'–ד'): **${money(s.fee, "סכום")} ₪ + מע"מ**.`);
+      if (s.walls) {
+        stage("תוספות אפשריות");
+        bullet(`הצעה זו מבוססת על תכנון על גבי מערך הקירות הקיים של הקבלן. במידה ויוחלט על הזזה, שבירה או בנייה מחדש של **עד 2 קירות פנים**, תתווסף תוספת גלובלית חד-פעמית של **${money(s.wallsFee, "סכום")} ₪ + מע"מ**, המכסה את התכנון מחדש של אותם אזורים ואת עדכון תוכניות התשתיות (חשמל ואינסטלציה) באותם חללים.`);
+      }
+      stage("חלוקת התשלומים (לפי התקדמות שלבים)");
+      payTable();
+    }
+
+    if (s.type === "reno") {
+      const scope = v(s.scope, "מה משפצים");
+      B.push({ k: "title", text: `הצעת מחיר – שיפוץ ${scope} ב${v(s.property, "סוג הנכס")} ב${v(s.address, "כתובת")}` });
+      p("תודה על פנייתכם.");
+      p(`להלן הצעה לליווי אדריכלי לשיפוץ ${scope}, משלב המדידות והחלופות ועד לפיקוח העליון.`);
+      section("תכולת העבודה ושלבי הפרויקט");
+      stage("שלב א': מדידות וחלופות תכנוניות");
+      bullet("פגישת פרוגרמה מעמיקה להגדרת הצרכים, התקציב והסגנון העיצובי.");
+      bullet(`מדידה ושרטוט ראשוני של ${v(s.measure, "מה מודדים")}.`);
+      bullet("הכנת 2–3 חלופות רעיוניות לסידור המטבח מחדש (העמדת ריהוט ומכשירים).");
+      bullet("הכנת חלופות לחלוקת חללי הרחצה והשירותים לניצול מקסימלי של המרחב.");
+      bullet("סימון נקודות התאורה הדורשות בחירת גופי תאורה חדשים / ביטול / תוספת.");
+      price(`**מחיר שלב א':** ${money(s.p1, "מחיר")} ₪ + מע"מ`);
+      stage("שלב ב': תוכניות עבודה מפורטות לביצוע (סט קבלן)");
+      p("הפקת סט שרטוטים מלא ומדויק הכולל:");
+      bullet("תוכנית אינסטלציה (מיקומי נקודות מים, ניקוזים, אסלות תלויות ואינטרפוצים), כולל נקודות חשמל ותאורה.");
+      bullet("תוכנית חשמל למטבח – מיקומי שקעים, נקודות כוח למכשירים, הכנה לתאורה במידת הצורך.");
+      bullet(`תוכנית פריסת קירות מפורטת עבור ${v(s.elev, "חדרי רחצה")} (מיקומי אריחים וסניטריה).`);
+      price(`**מחיר שלב ב':** ${money(s.p2, "מחיר")} ₪ + מע"מ`);
+      stage("שלב ג': תוכניות נגרות מפורטות (מטבח וחדרי רחצה)");
+      bullet("תכנון מפורט של ארונות המטבח, כולל פרטי נגרות והפקת תוכניות להגשה לחברות מטבחים או לנגר פרטי.");
+      bullet("תכנון ארונות כיור ומראות ייעודיות לחדרי הרחצה והשירותים.");
+      price(`**מחיר שלב ג':** ${money(s.p3, "מחיר")} ₪ + מע"מ`);
+      stage("שלב ד': פגישות לבחירת חומרי גמר");
+      const mt = num(s.mTiles) + num(s.mKitchen) + num(s.mLight);
+      bullet(`**${mt} פגישות** (עד ${v(s.hours, "שעות")} שעות לפגישה) בבתי עסק במרכז הארץ:`);
+      if (num(s.mTiles)) bullet(`${num(s.mTiles)} פגישות לבחירת קרמיקה, חיפויים, ריצוף וכלים סניטריים.`, 1);
+      if (num(s.mKitchen)) bullet(`${num(s.mKitchen)} פגישות לסגירת מפרט המטבח (חברת מטבחים / נגר) ובחירת משטח.`, 1);
+      if (num(s.mLight)) bullet(`${num(s.mLight)} פגישות לבחירת גופי תאורה.`, 1);
+      price(`**מחיר שלב ד':** ${money(s.p4, "מחיר")} ₪ + מע"מ`);
+      stage("שלב ה': פיקוח עליון");
+      bullet(`עמידה בקשר מול הקבלן המבצע שנבחר, ו-${v(s.visits, "מס'")} הגעות לנכס בנקודות מפתח, כגון:`);
+      ["לאחר ההריסה ולפני תחילת עבודות אינסטלציה / חשמל.", "בדיקת הכנות האינסטלציה והחשמל לפני סגירת קירות / ריצוף.",
+        "בדיקת פריסת האריחים בתחילת עבודת החיפוי.", "במהלך התקנת הנגרות והמטבח.", "בגמר השיפוץ."].forEach((t) => bullet(t, 1));
+      price(`**מחיר שלב ה':** ${money(s.p5, "מחיר")} ₪ + מע"מ`);
+
+      section("סיכום עלויות");
+      B.push({
+        k: "table", widths: [700, 6138, 2800], totalRow: true,
+        rows: [
+          ["שלב", "תיאור השלב", "עלות (₪, לפני מע\"מ)"],
+          ["א'", "מדידות וחלופות תכנוניות", money(s.p1, "מחיר")],
+          ["ב'", "תוכניות עבודה לקבלן", money(s.p2, "מחיר")],
+          ["ג'", "תוכניות נגרות מפורטות", money(s.p3, "מחיר")],
+          ["ד'", "פגישות לבחירת חומרי גמר", money(s.p4, "מחיר")],
+          ["ה'", "פיקוח עליון", money(s.p5, "מחיר")],
+          ["", "שכר טרחה גלובלי לפרויקט", `${fmt(T)} ₪ + מע"מ`],
+        ],
+      });
+      section("פגישות וליווי");
+      meetingsCommon(rate).forEach((t) => bullet(t));
+      section("ההצעה אינה כוללת");
+      EXCLUSIONS_DESIGN.forEach((t) => bullet(t));
+      section("הערות ותנאים כלליים");
+      numbered([...termsDesign(rate), ...extraLines(s), TERMINATION]);
+      section("תנאי תשלום");
+      payTable();
+    }
+
+    if (s.type === "permit") {
+      B.push({ k: "title", text: `הצעת מחיר – רישוי היתר ${v(s.permitKind, "סוג")} ל${v(s.building, "סוג המבנה")}` });
+      p("תודה על פנייתכם.");
+      p("להלן הצעה לטיפול בהליך הרישוי, עד לקבלת היתר הבנייה.");
+      section("תכולת העבודה");
+      bullet(`טיפול בכל שלבי הרישוי עד לקבלת היתר הבנייה, עבור ${v(s.work, "תיאור העבודה")}, ב${v(s.building, "סוג המבנה")} שנבנה לפי היתר בנייה קיים.`);
+      bullet("הליך קבלת תיק מידע ופתיחת בקשה, במסגרת הליך רישוי מלא במערכת \"רישוי זמין\".");
+      bullet("הזנת כלל הנתונים והקבצים שיתבקשו במערכת, ותיאום מול היועצים השונים ומול מחלקת הרישוי.");
+      bullet("עדכון הבקשה לפי הערות הרישוי – עבור הערות ללא שינוי מהותי בלבד.");
+      bullet(`הבקשה להיתר (גרמושקה) בקנה מידה 1:100, הכוללת מבטי על, חזיתות וחתכי המבנה, וכן קובץ חישובי שטחים וממ"ד${s.gramOther ? ` – תוגש כפי שהוכנה ע"י ${v(s.gramBy, "שם האדריכל")}` : ""}.`);
+      note("* במידה וידרשו שינויים מהותיים כתוצאה מדרישות מחלקת הרישוי / הג\"א / המִנהל או כל גורם אחר – התשלום על שינויים / עדכונים אלה אינו כלול בהצעה זו, ויתומחר לפי שעה.");
+      note("* הכל בכפוף לשיתוף פעולה מלא של המזמין בכל שלבי הטיפול, עד לקבלת היתר הבנייה.");
+      section("ההצעה אינה כוללת");
+      ["פגישות מחוץ למשרד. באם יידרשו פגישות כלשהן מחוץ למשרד – יתומחרו לפי שעה.",
+        "טיפול בחתימות שכנים ו/או שליחת הודעות בדואר רשום (במידה ויידרש).",
+        "טיפול מול רמ\"י (מ.מ.י) – **באחריות המזמין**.",
+        "השירותים והיועצים שיידרשו לצורך קבלת ההיתר, לרבות: מודד, יועץ קרקע, מהנדס קונסטרוקציה, מהנדס אינסטלציה, מהנדס חשמל, אדריכל נוף, מכון התקנים, סקר עצים, אישור פקיד היערות וכיוצ\"ב.",
+        "הפקת נסח טאבו, תשלום אגרות, היטלים, מיסים וכו' – על חשבון המזמין.",
+        "הדפסות ושליחתן – ישולמו ע\"י המזמין ישירות למכון ההעתקות."].forEach((t) => bullet(t));
+      section("הערות ותנאים כלליים");
+      const ex = s.existing ? [
+        `מאחר ו${v(s.existingWhat, "מה כבר נבנה")} כבר קיימת בפועל – הלקוח מצהיר ומאשר כי התוספת נבנתה על ידו (או מטעמו) טרם התקשרותו עמי, ללא מעורבות, תכנון, פיקוח או ידיעה מצדי בזמן הביצוע, ואין לי אחריות כלשהי לגבי התאמה מכל סוג של הבית הקיים להיתר הבנייה הקיים.`,
+        "הלקוח ייקח על עצמו אחריות מלאה ובלעדית לכל הליך מנהלי, פלילי או אזרחי (כגון תביעות, צווי הריסה או קנסות מהוועדה) הנובעים מקיום בנייה שטרם התקבל עבורה היתר.",
+        "אין לי כל אחריות, הנדסית או בטיחותית, לגבי הבנייה הקיימת או המבוקשת במהות הבקשה (מאחר והיא כבר נבנתה).",
+        "ההצעה מסתמכת על ההגשה הקיימת, ועל כך שאין חריגה כלשהי מהשטחים המותרים, מאחוזי הבנייה המותרים או מזכויות בנייה כלשהן, ושכל השטחים הקיימים והמבוקשים נכללו ואושרו ע\"י מחלקת הרישוי.",
+        "אין לי אחריות כלשהי לגבי הבית / ההיתר הקיים, או לבדיקת התאמת הקיים בפועל להיתר הקיים / למוצג בבקשה זו כמבנה קיים.",
+      ] : [];
+      numbered([...ex, ...extraLines(s), TERMINATION]);
+      section("שכר טרחה ותנאי תשלום");
+      p(`שכר הטרחה עבור הסעיפים המפורטים לעיל: **${money(s.fee, "סכום")} ₪ + מע"מ**.`);
+      p(`עבודה מעבר למפורט תתומחר לפי שעות עבודה – ${rate} ₪ + מע"מ לשעת עבודה.`);
+      stage("שלבי תשלום");
+      payTable();
+      note("* גמר התשלום לא יידחה באם המזמין החליט שלא למלא אחר דרישות הוועדה – תשלום אגרה / היטל / תשלום ליועץ כלשהו, או באם המזמין לא ידרוש את היתר הבנייה בפועל מרשות הרישוי וכו'.");
+    }
+
+    B.push({ k: "sign" });
+    B.push({ k: "closing" });
+    return B;
+  }
+
+  // ---------- Markup ----------
+  function parse(text, base = {}) {
+    const out = [];
+    for (const part of String(text).split(/(\*\*[^*]+\*\*|\[\[[^\]]+\]\])/g)) {
+      if (!part) continue;
+      if (part.startsWith("**")) { out.push(...parse(part.slice(2, -2), { ...base, bold: true })); continue; }
+      if (part.startsWith("[[")) { out.push({ ...base, text: part.slice(2, -2), missing: true }); continue; }
+      out.push({ ...base, text: part });
+    }
+    return out;
+  }
+  const missingCount = (blocks) => {
+    const texts = [];
+    blocks.forEach((b) => { if (b.text) texts.push(b.text); (b.items || []).forEach((t) => texts.push(t)); (b.rows || []).forEach((r) => texts.push(...r)); });
+    return texts.reduce((n, t) => n + parse(t).filter((r) => r.missing).length, 0);
+  };
+
+  // ---------- HTML preview ----------
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const html = (text) => parse(text).map((r) => {
+    let h = esc(r.text);
+    if (r.bold) h = `<b>${h}</b>`;
+    if (r.missing) h = `<mark>${h}</mark>`;
+    return h;
+  }).join("");
+
+  function toHTML(blocks) {
+    const out = [];
+    let list = null;
+    const close = () => { if (list) { out.push(`</ul>`); list = null; } };
+    for (const b of blocks) {
+      if (b.k !== "bullet") close();
+      switch (b.k) {
+        case "meta": out.push(`<p class="q-meta${b.last ? " last" : ""}">${html(b.text)}</p>`); break;
+        case "title": out.push(`<h1 class="q-title">${html(b.text)}</h1>`); break;
+        case "section": out.push(`<h2 class="q-sec">${html(b.text)}</h2>`); break;
+        case "stage": out.push(`<h3 class="q-stage">${html(b.text)}</h3>`); break;
+        case "p": out.push(`<p>${html(b.text)}</p>`); break;
+        case "note": out.push(`<p class="q-note">${html(b.text)}</p>`); break;
+        case "price": out.push(`<p class="q-price">${html(b.text)}</p>`); break;
+        case "bullet":
+          if (!list) { out.push(`<ul class="q-list">`); list = true; }
+          out.push(`<li class="lvl${b.level}">${html(b.text)}</li>`); break;
+        case "num": out.push(`<ol class="q-num">${b.items.map((t) => `<li>${html(t)}</li>`).join("")}</ol>`); break;
+        case "table":
+          out.push(`<div class="q-table-wrap"><table class="q-table">${b.rows.map((r, i) => {
+            const tag = i === 0 ? "th" : "td";
+            const cls = b.totalRow && i === b.rows.length - 1 ? ` class="total"` : "";
+            return `<tr${cls}>${r.map((c) => `<${tag}>${html(c)}</${tag}>`).join("")}</tr>`;
+          }).join("")}</table></div>`); break;
+        case "sign":
+          out.push(`<p class="q-sign-h"><b>ובזאת באו הצדדים על החתום:</b></p><div class="q-sign">${["חתימת המזמין/ים", "תאריך", "חתימת המתכננת"].map((t) => `<div><span></span>${t}</div>`).join("")}</div>`); break;
+        case "closing":
+          out.push(`<p class="q-close">אשמח לעמוד לרשותכם בכל שאלה.<br>בברכה,<br><b>Orit Lev Architect</b></p>`); break;
+      }
+    }
+    close();
+    return out.join("\n");
+  }
+
+  // ---------- Word (.docx) ----------
+  function toDocx(blocks, D, logo) {
+    const FONT = "Arial", ACCENT = "6E625A", MUTED = "8C8C8C", LINE = "C9C2BC", SHADE = "F3F0ED", BODY = 22;
+    const PAGE_W = 11906, MARGIN = 1134, CW = PAGE_W - 2 * MARGIN;
+    const runs = (text, o = {}) => parse(text).map((r) => new D.TextRun({
+      text: r.text, font: FONT, size: o.size || BODY, rightToLeft: true, ...o,
+      bold: r.bold || o.bold, highlight: r.missing ? "yellow" : undefined,
+    }));
+    const para = (text, opts = {}, ro = {}) => new D.Paragraph({
+      bidirectional: true, spacing: { after: 100, line: 300 }, ...opts, children: runs(text, ro),
+    });
+    const border = { style: D.BorderStyle.SINGLE, size: 4, color: LINE };
+    const noB = { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" };
+    const noBorders = { top: noB, bottom: noB, left: noB, right: noB, insideHorizontal: noB, insideVertical: noB };
+    const cellNoB = { top: noB, bottom: noB, left: noB, right: noB };
+    let inst = 0;
+    const kids = [];
+    for (const b of blocks) {
+      switch (b.k) {
+        case "meta": kids.push(para(b.text, { spacing: { after: b.last ? 300 : 40 } })); break;
+        case "title": kids.push(para(b.text, { alignment: D.AlignmentType.CENTER, spacing: { after: 300 } }, { bold: true, size: 32, color: ACCENT })); break;
+        case "section": kids.push(para(b.text, { keepNext: true, spacing: { before: 360, after: 140 },
+          border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: LINE, space: 4 } } }, { bold: true, size: 26, color: ACCENT })); break;
+        case "stage": kids.push(para(b.text, { keepNext: true, spacing: { before: 220, after: 80 } }, { bold: true, size: 23 })); break;
+        case "p": kids.push(para(b.text, b.before ? { spacing: { before: b.before, after: 100 } } : {})); break;
+        case "note": kids.push(para(b.text, { spacing: { after: 80 } }, { italics: true, color: MUTED, size: 20 })); break;
+        case "price": kids.push(para(b.text, { spacing: { before: 60, after: 120 }, indent: { start: 360 } })); break;
+        case "bullet": kids.push(para(b.text, { numbering: { reference: "bul", level: b.level }, spacing: { after: 60, line: 290 } })); break;
+        case "num": inst += 1; b.items.forEach((t) => kids.push(para(t, { numbering: { reference: "num", level: 0, instance: inst }, spacing: { after: 80, line: 290 } }))); break;
+        case "table":
+          kids.push(new D.Table({
+            visuallyRightToLeft: true, width: { size: CW, type: D.WidthType.DXA }, columnWidths: b.widths,
+            rows: b.rows.map((cells, ri) => {
+              const shade = ri === 0 || (b.totalRow && ri === b.rows.length - 1);
+              return new D.TableRow({
+                tableHeader: ri === 0, cantSplit: true,
+                children: cells.map((c, ci) => new D.TableCell({
+                  borders: { top: border, bottom: border, left: border, right: border },
+                  width: { size: b.widths[ci], type: D.WidthType.DXA },
+                  shading: shade ? { fill: SHADE, type: D.ShadingType.CLEAR, color: "auto" } : undefined,
+                  margins: { top: 80, bottom: 80, left: 120, right: 120 }, verticalAlign: D.VerticalAlign.CENTER,
+                  children: [para(c, { spacing: { after: 0 }, alignment: ci === 0 ? D.AlignmentType.CENTER : undefined }, { bold: shade, size: 21 })],
+                })),
+              });
+            }),
+          })); break;
+        case "sign": {
+          const w = [3212, 3213, 3213];
+          const cell = (t) => new D.TableCell({
+            borders: cellNoB, width: { size: w[0], type: D.WidthType.DXA },
+            children: [para("_____________________", { alignment: D.AlignmentType.CENTER, spacing: { before: 440, after: 40 } }, { color: MUTED }),
+              para(t, { alignment: D.AlignmentType.CENTER }, { size: 20 })],
+          });
+          kids.push(para("ובזאת באו הצדדים על החתום:", { spacing: { before: 280, after: 0 }, keepNext: true }, { bold: true }));
+          kids.push(new D.Table({ visuallyRightToLeft: true, borders: noBorders, width: { size: CW, type: D.WidthType.DXA }, columnWidths: w,
+            rows: [new D.TableRow({ cantSplit: true, children: [cell("חתימת המזמין/ים"), cell("תאריך"), cell("חתימת המתכננת")] })] }));
+          break;
+        }
+        case "closing":
+          kids.push(para("אשמח לעמוד לרשותכם בכל שאלה.", { spacing: { before: 240, after: 60 }, keepNext: true }));
+          kids.push(para("בברכה,", { spacing: { after: 40 }, keepNext: true }));
+          kids.push(para("Orit Lev Architect", {}, { bold: true, color: ACCENT }));
+          break;
+      }
+    }
+    const header = new D.Header({ children: [
+      new D.Table({ visuallyRightToLeft: true, borders: noBorders, width: { size: CW, type: D.WidthType.DXA }, columnWidths: [CW - 1200, 1200],
+        rows: [new D.TableRow({ children: [
+          new D.TableCell({ borders: cellNoB, width: { size: CW - 1200, type: D.WidthType.DXA }, verticalAlign: D.VerticalAlign.BOTTOM,
+            children: [new D.Paragraph({ bidirectional: true, children: [new D.TextRun({ text: "Orit Lev Architect", font: FONT, size: 20, color: ACCENT, characterSpacing: 30 })] })] }),
+          new D.TableCell({ borders: cellNoB, width: { size: 1200, type: D.WidthType.DXA },
+            children: [new D.Paragraph({ alignment: D.AlignmentType.LEFT, children: [new D.ImageRun({ type: "jpg", data: logo, transformation: { width: 46, height: 46 } })] })] }),
+        ] })] }),
+      new D.Paragraph({ border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: LINE, space: 1 } }, spacing: { after: 0 }, children: [] }),
+    ] });
+    const small = { font: FONT, size: 16, color: MUTED };
+    const footer = new D.Footer({ children: [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: LINE, space: 6 } },
+        children: [new D.TextRun({ text: "Orit Lev Architect  |  Tel: 03.5100885 / 054.397.2392  |  oritlev.arch@gmail.com", ...small })] }),
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, bidirectional: true, children: [
+        new D.TextRun({ text: "עמוד ", ...small, rightToLeft: true }), new D.TextRun({ children: [D.PageNumber.CURRENT], ...small }),
+        new D.TextRun({ text: " מתוך ", ...small, rightToLeft: true }), new D.TextRun({ children: [D.PageNumber.TOTAL_PAGES], ...small }),
+      ] }),
+    ] });
+    const lvl = (level, text, fmt, indent) => ({ level, format: fmt, text, alignment: D.AlignmentType.START,
+      style: { paragraph: { indent: { start: indent, hanging: 360 } }, run: { color: ACCENT } } });
+    return new D.Document({
+      creator: "Orit Lev Architect",
+      styles: { default: { document: { run: { font: FONT, size: BODY } } } },
+      numbering: { config: [
+        { reference: "bul", levels: [lvl(0, "•", D.LevelFormat.BULLET, 540), lvl(1, "◦", D.LevelFormat.BULLET, 1080)] },
+        { reference: "num", levels: [lvl(0, "%1.", D.LevelFormat.DECIMAL, 540)] },
+      ] },
+      sections: [{
+        properties: { page: { size: { width: PAGE_W, height: 16838 }, margin: { top: 1500, bottom: 1300, left: MARGIN, right: MARGIN, header: 500, footer: 450 } } },
+        headers: { default: header }, footers: { default: footer }, children: kids,
+      }],
+    });
+  }
+
+  function filename(s) {
+    const clean = (x) => String(x || "").replace(/[\\/:*?"<>|]+/g, "-").trim();
+    const parts = ["הצעת מחיר", TYPES[s.type], clean(s.client), clean(s.date).replace(/\//g, "-")].filter(Boolean);
+    return parts.join(" - ") + ".docx";
+  }
+
+  root.QuoteCore = { TYPES, defaults, model, toHTML, toDocx, total, pctSum, missingCount, filename, fmt, num };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+(() => {
+  const Q = window.QuoteCore;
+  const LOGO = "data:image/jpeg;base64,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dGFsUmVzPC9rZXk+Cgk8ZGljdD4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuY3JlYXRvcjwva2V5PgoJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50aW5nbWFuYWdlcjwvc3RyaW5nPgoJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5pdGVtQXJyYXk8L2tleT4KCQk8YXJyYXk+CgkJCTxkaWN0PgoJCQkJPGtleT5jb20uYXBwbGUucHJpbnQuUGFnZUZvcm1hdC5QTUhvcml6b250YWxSZXM8L2tleT4KCQkJCTxyZWFsPjcyPC9yZWFsPgoJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNsaWVudDwva2V5PgoJCQkJPHN0cmluZz5jb20uYXBwbGUucHJpbnRpbmdtYW5hZ2VyPC9zdHJpbmc+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQubW9kRGF0ZTwva2V5PgoJCQkJPGRhdGU+MjAxMy0wNC0wN1QxNzowNTo0NVo8L2RhdGU+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuc3RhdGVGbGFnPC9rZXk+CgkJCQk8aW50ZWdlcj4wPC9pbnRlZ2VyPgoJCQk8L2RpY3Q+CgkJPC9hcnJheT4KCTwvZGljdD4KCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1PcmllbnRhdGlvbjwva2V5PgoJPGRpY3Q+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJPGFycmF5PgoJCQk8ZGljdD4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1PcmllbnRhdGlvbjwva2V5PgoJCQkJPGludGVnZXI+MTwvaW50ZWdlcj4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5jbGllbnQ8L2tleT4KCQkJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50aW5nbWFuYWdlcjwvc3RyaW5nPgoJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0Lm1vZERhdGU8L2tleT4KCQkJCTxkYXRlPjIwMTMtMDQtMDdUMTc6MDU6NDVaPC9kYXRlPgoJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LnN0YXRlRmxhZzwva2V5PgoJCQkJPGludGVnZXI+MDwvaW50ZWdlcj4KCQkJPC9kaWN0PgoJCTwvYXJyYXk+Cgk8L2RpY3Q+Cgk8a2V5PmNvbS5hcHBsZS5wcmludC5QYWdlRm9ybWF0LlBNU2NhbGluZzwva2V5PgoJPGRpY3Q+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJPGFycmF5PgoJCQk8ZGljdD4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1TY2FsaW5nPC9rZXk+CgkJCQk8cmVhbD4xPC9yZWFsPgoJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNsaWVudDwva2V5PgoJCQkJPHN0cmluZz5jb20uYXBwbGUucHJpbnRpbmdtYW5hZ2VyPC9zdHJpbmc+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQubW9kRGF0ZTwva2V5PgoJCQkJPGRhdGU+MjAxMy0wNC0wN1QxNzowNTo0NVo8L2RhdGU+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuc3RhdGVGbGFnPC9rZXk+CgkJCQk8aW50ZWdlcj4wPC9pbnRlZ2VyPgoJCQk8L2RpY3Q+CgkJPC9hcnJheT4KCTwvZGljdD4KCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1WZXJ0aWNhbFJlczwva2V5PgoJPGRpY3Q+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJPGFycmF5PgoJCQk8ZGljdD4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1WZXJ0aWNhbFJlczwva2V5PgoJCQkJPHJlYWw+NzI8L3JlYWw+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuY2xpZW50PC9rZXk+CgkJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5tb2REYXRlPC9rZXk+CgkJCQk8ZGF0ZT4yMDEzLTA0LTA3VDE3OjA1OjQ1WjwvZGF0ZT4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5zdGF0ZUZsYWc8L2tleT4KCQkJCTxpbnRlZ2VyPjA8L2ludGVnZXI+CgkJCTwvZGljdD4KCQk8L2FycmF5PgoJPC9kaWN0PgoJPGtleT5jb20uYXBwbGUucHJpbnQuUGFnZUZvcm1hdC5QTVZlcnRpY2FsU2NhbGluZzwva2V5PgoJPGRpY3Q+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJPGFycmF5PgoJCQk8ZGljdD4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1WZXJ0aWNhbFNjYWxpbmc8L2tleT4KCQkJCTxyZWFsPjE8L3JlYWw+CgkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuY2xpZW50PC9rZXk+CgkJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5tb2REYXRlPC9rZXk+CgkJCQk8ZGF0ZT4yMDEzLTA0LTA3VDE3OjA1OjQ1WjwvZGF0ZT4KCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5zdGF0ZUZsYWc8L2tleT4KCQkJCTxpbnRlZ2VyPjA8L2ludGVnZXI+CgkJCTwvZGljdD4KCQk8L2FycmF5PgoJPC9kaWN0PgoJPGtleT5jb20uYXBwbGUucHJpbnQuc3ViVGlja2V0LnBhcGVyX2luZm9fdGlja2V0PC9rZXk+Cgk8ZGljdD4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYWdlRm9ybWF0LlBNQWRqdXN0ZWRQYWdlUmVjdDwva2V5PgoJCTxkaWN0PgoJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuY3JlYXRvcjwva2V5PgoJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0Lml0ZW1BcnJheTwva2V5PgoJCQk8YXJyYXk+CgkJCQk8ZGljdD4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYWdlRm9ybWF0LlBNQWRqdXN0ZWRQYWdlUmVjdDwva2V5PgoJCQkJCTxhcnJheT4KCQkJCQkJPHJlYWw+MC4wPC9yZWFsPgoJCQkJCQk8cmVhbD4wLjA8L3JlYWw+CgkJCQkJCTxyZWFsPjc4MzwvcmVhbD4KCQkJCQkJPHJlYWw+NTU5PC9yZWFsPgoJCQkJCTwvYXJyYXk+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNsaWVudDwva2V5PgoJCQkJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50aW5nbWFuYWdlcjwvc3RyaW5nPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5tb2REYXRlPC9rZXk+CgkJCQkJPGRhdGU+MjAxMy0wNC0wOFQwNjo0MzowMlo8L2RhdGU+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LnN0YXRlRmxhZzwva2V5PgoJCQkJCTxpbnRlZ2VyPjA8L2ludGVnZXI+CgkJCQk8L2RpY3Q+CgkJCTwvYXJyYXk+CgkJPC9kaWN0PgoJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhZ2VGb3JtYXQuUE1BZGp1c3RlZFBhcGVyUmVjdDwva2V5PgoJCTxkaWN0PgoJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuY3JlYXRvcjwva2V5PgoJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0Lml0ZW1BcnJheTwva2V5PgoJCQk8YXJyYXk+CgkJCQk8ZGljdD4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYWdlRm9ybWF0LlBNQWRqdXN0ZWRQYXBlclJlY3Q8L2tleT4KCQkJCQk8YXJyYXk+CgkJCQkJCTxyZWFsPi0xODwvcmVhbD4KCQkJCQkJPHJlYWw+LTE4PC9yZWFsPgoJCQkJCQk8cmVhbD44MjQ8L3JlYWw+CgkJCQkJCTxyZWFsPjU3NzwvcmVhbD4KCQkJCQk8L2FycmF5PgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5jbGllbnQ8L2tleT4KCQkJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQubW9kRGF0ZTwva2V5PgoJCQkJCTxkYXRlPjIwMTMtMDQtMDhUMDY6NDM6MDJaPC9kYXRlPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5zdGF0ZUZsYWc8L2tleT4KCQkJCQk8aW50ZWdlcj4wPC9pbnRlZ2VyPgoJCQkJPC9kaWN0PgoJCQk8L2FycmF5PgoJCTwvZGljdD4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYXBlckluZm8uUE1QYXBlck5hbWU8L2tleT4KCQk8ZGljdD4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQkJPHN0cmluZz5jb20uYXBwbGUucHJpbnQucG0uUG9zdFNjcmlwdDwvc3RyaW5nPgoJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJCTxhcnJheT4KCQkJCTxkaWN0PgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhcGVySW5mby5QTVBhcGVyTmFtZTwva2V5PgoJCQkJCTxzdHJpbmc+aXNvLWE0PC9zdHJpbmc+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNsaWVudDwva2V5PgoJCQkJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50LnBtLlBvc3RTY3JpcHQ8L3N0cmluZz4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQubW9kRGF0ZTwva2V5PgoJCQkJCTxkYXRlPjIwMDMtMDctMDFUMTc6NDk6MzZaPC9kYXRlPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5zdGF0ZUZsYWc8L2tleT4KCQkJCQk8aW50ZWdlcj4xPC9pbnRlZ2VyPgoJCQkJPC9kaWN0PgoJCQk8L2FycmF5PgoJCTwvZGljdD4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYXBlckluZm8uUE1VbmFkanVzdGVkUGFnZVJlY3Q8L2tleT4KCQk8ZGljdD4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQkJPHN0cmluZz5jb20uYXBwbGUucHJpbnQucG0uUG9zdFNjcmlwdDwvc3RyaW5nPgoJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJCTxhcnJheT4KCQkJCTxkaWN0PgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhcGVySW5mby5QTVVuYWRqdXN0ZWRQYWdlUmVjdDwva2V5PgoJCQkJCTxhcnJheT4KCQkJCQkJPHJlYWw+MC4wPC9yZWFsPgoJCQkJCQk8cmVhbD4wLjA8L3JlYWw+CgkJCQkJCTxyZWFsPjc4MzwvcmVhbD4KCQkJCQkJPHJlYWw+NTU5PC9yZWFsPgoJCQkJCTwvYXJyYXk+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNsaWVudDwva2V5PgoJCQkJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50aW5nbWFuYWdlcjwvc3RyaW5nPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5tb2REYXRlPC9rZXk+CgkJCQkJPGRhdGU+MjAxMy0wNC0wN1QxNzowNTo0NVo8L2RhdGU+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LnN0YXRlRmxhZzwva2V5PgoJCQkJCTxpbnRlZ2VyPjA8L2ludGVnZXI+CgkJCQk8L2RpY3Q+CgkJCTwvYXJyYXk+CgkJPC9kaWN0PgoJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhcGVySW5mby5QTVVuYWRqdXN0ZWRQYXBlclJlY3Q8L2tleT4KCQk8ZGljdD4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LmNyZWF0b3I8L2tleT4KCQkJPHN0cmluZz5jb20uYXBwbGUucHJpbnQucG0uUG9zdFNjcmlwdDwvc3RyaW5nPgoJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuaXRlbUFycmF5PC9rZXk+CgkJCTxhcnJheT4KCQkJCTxkaWN0PgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LlBhcGVySW5mby5QTVVuYWRqdXN0ZWRQYXBlclJlY3Q8L2tleT4KCQkJCQk8YXJyYXk+CgkJCQkJCTxyZWFsPi0xODwvcmVhbD4KCQkJCQkJPHJlYWw+LTE4PC9yZWFsPgoJCQkJCQk8cmVhbD44MjQ8L3JlYWw+CgkJCQkJCTxyZWFsPjU3NzwvcmVhbD4KCQkJCQk8L2FycmF5PgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5jbGllbnQ8L2tleT4KCQkJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludGluZ21hbmFnZXI8L3N0cmluZz4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQubW9kRGF0ZTwva2V5PgoJCQkJCTxkYXRlPjIwMTMtMDQtMDdUMTc6MDU6NDVaPC9kYXRlPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5zdGF0ZUZsYWc8L2tleT4KCQkJCQk8aW50ZWdlcj4wPC9pbnRlZ2VyPgoJCQkJPC9kaWN0PgoJCQk8L2FycmF5PgoJCTwvZGljdD4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYXBlckluZm8ucHBkLlBNUGFwZXJOYW1lPC9rZXk+CgkJPGRpY3Q+CgkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5jcmVhdG9yPC9rZXk+CgkJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50LnBtLlBvc3RTY3JpcHQ8L3N0cmluZz4KCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0Lml0ZW1BcnJheTwva2V5PgoJCQk8YXJyYXk+CgkJCQk8ZGljdD4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC5QYXBlckluZm8ucHBkLlBNUGFwZXJOYW1lPC9rZXk+CgkJCQkJPHN0cmluZz5BNDwvc3RyaW5nPgoJCQkJCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5jbGllbnQ8L2tleT4KCQkJCQk8c3RyaW5nPmNvbS5hcHBsZS5wcmludC5wbS5Qb3N0U2NyaXB0PC9zdHJpbmc+CgkJCQkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0Lm1vZERhdGU8L2tleT4KCQkJCQk8ZGF0ZT4yMDAzLTA3LTAxVDE3OjQ5OjM2WjwvZGF0ZT4KCQkJCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQuc3RhdGVGbGFnPC9rZXk+CgkJCQkJPGludGVnZXI+MTwvaW50ZWdlcj4KCQkJCTwvZGljdD4KCQkJPC9hcnJheT4KCQk8L2RpY3Q+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LkFQSVZlcnNpb248L2tleT4KCQk8c3RyaW5nPjAwLjIwPC9zdHJpbmc+CgkJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LnByaXZhdGVMb2NrPC9rZXk+CgkJPGZhbHNlLz4KCQk8a2V5PmNvbS5hcHBsZS5wcmludC50aWNrZXQudHlwZTwva2V5PgoJCTxzdHJpbmc+Y29tLmFwcGxlLnByaW50LlBhcGVySW5mb1RpY2tldDwvc3RyaW5nPgoJPC9kaWN0PgoJPGtleT5jb20uYXBwbGUucHJpbnQudGlja2V0LkFQSVZlcnNpb248L2tleT4KCTxzdHJpbmc+MDAuMjA8L3N0cmluZz4KCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC5wcml2YXRlTG9jazwva2V5PgoJPGZhbHNlLz4KCTxrZXk+Y29tLmFwcGxlLnByaW50LnRpY2tldC50eXBlPC9rZXk+Cgk8c3RyaW5nPmNvbS5hcHBsZS5wcmludC5QYWdlRm9ybWF0VGlja2V0PC9zdHJpbmc+CjwvZGljdD4KPC9wbGlzdD4KOEJJTQPtAAAAAAAQAGAAAAABAAEAYAAAAAEAAThCSU0EJgAAAAAADgAAAAAAAAAAAAA/gAAAOEJJTQQNAAAAAAAEAAAAeDhCSU0EGQAAAAAABAAAAB44QklNA/MAAAAAAAkAAAAAAAAAAAEAOEJJTQQKAAAAAAABAAA4QklNJxAAAAAAAAoAAQAAAAAAAAABOEJJTQP1AAAAAABIAC9mZgABAGxmZgAGAAAAAAABAC9mZgABAKGZmgAGAAAAAAABADIAAAABAFoAAAAGAAAAAAABADUAAAABAC0AAAAGAAAAAAABOEJJTQP4AAAAAABwAAD/////////////////////////////A+gAAAAA/////////////////////////////wPoAAAAAP////////////////////////////8D6AAAAAD/////////////////////////////A+gAADhCSU0ECAAAAAAAEAAAAAEAAAJAAAACQAAAAAA4QklNBB4AAAAAAAQAAAAAOEJJTQQaAAAAAANRAAAABgAAAAAAAAAAAAAAbAAAAGwAAAAOAG8AcgBpAHQAXwBsAG8AZwBvAF8AZwByAGUAeQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAbAAAAGwAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAQAAAAAAAG51bGwAAAACAAAABmJvdW5kc09iamMAAAABAAAAAAAAUmN0MQAAAAQAAAAAVG9wIGxvbmcAAAAAAAAAAExlZnRsb25nAAAAAAAAAABCdG9tbG9uZwAAAGwAAAAAUmdodGxvbmcAAABsAAAABnNsaWNlc1ZsTHMAAAABT2JqYwAAAAEAAAAAAAVzbGljZQAAABIAAAAHc2xpY2VJRGxvbmcAAAAAAAAAB2dyb3VwSURsb25nAAAAAAAAAAZvcmlnaW5lbnVtAAAADEVTbGljZU9yaWdpbgAAAA1hdXRvR2VuZXJhdGVkAAAAAFR5cGVlbnVtAAAACkVTbGljZVR5cGUAAAAASW1nIAAAAAZib3VuZHNPYmpjAAAAAQAAAAAAAFJjdDEAAAAEAAAAAFRvcCBsb25nAAAAAAAAAABMZWZ0bG9uZwAAAAAAAAAAQnRvbWxvbmcAAABsAAAAAFJnaHRsb25nAAAAbAAAAAN1cmxURVhUAAAAAQAAAAAAAG51bGxURVhUAAAAAQAAAAAAAE1zZ2VURVhUAAAAAQAAAAAABmFsdFRhZ1RFWFQAAAABAAAAAAAOY2VsbFRleHRJc0hUTUxib29sAQAAAAhjZWxsVGV4dFRFWFQAAAABAAAAAAAJaG9yekFsaWduZW51bQAAAA9FU2xpY2VIb3J6QWxpZ24AAAAHZGVmYXVsdAAAAAl2ZXJ0QWxpZ25lbnVtAAAAD0VTbGljZVZlcnRBbGlnbgAAAAdkZWZhdWx0AAAAC2JnQ29sb3JUeXBlZW51bQAAABFFU2xpY2VCR0NvbG9yVHlwZQAAAABOb25lAAAACXRvcE91dHNldGxvbmcAAAAAAAAACmxlZnRPdXRzZXRsb25nAAAAAAAAAAxib3R0b21PdXRzZXRsb25nAAAAAAAAAAtyaWdodE91dHNldGxvbmcAAAAAADhCSU0EKAAAAAAADAAAAAE/8AAAAAAAADhCSU0EFAAAAAAABAAAAAs4QklNBAwAAAAABKwAAAABAAAAbAAAAGwAAAFEAACIsAAABJAAGAAB/9j/4AAQSkZJRgABAgAASABIAAD/7QAMQWRvYmVfQ00AAf/uAA5BZG9iZQBkgAAAAAH/2wCEAAwICAgJCAwJCQwRCwoLERUPDAwPFRgTExUTExgRDAwMDAwMEQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwBDQsLDQ4NEA4OEBQODg4UFA4ODg4UEQwMDAwMEREMDAwMDAwRDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIAGwAbAMBIgACEQEDEQH/3QAEAAf/xAE/AAABBQEBAQEBAQAAAAAAAAADAAECBAUGBwgJCgsBAAEFAQEBAQEBAAAAAAAAAAEAAgMEBQYHCAkKCxAAAQQBAwIEAgUHBggFAwwzAQACEQMEIRIxBUFRYRMicYEyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzNRaisoMmRJNUZEXCo3Q2F9JV4mXys4TD03Xj80YnlKSFtJXE1OT0pbXF1eX1VmZ2hpamtsbW5vY3R1dnd4eXp7fH1+f3EQACAgECBAQDBAUGBwcGBTUBAAIRAyExEgRBUWFxIhMFMoGRFKGxQiPBUtHwMyRi4XKCkkNTFWNzNPElBhaisoMHJjXC0kSTVKMXZEVVNnRl4vKzhMPTdePzRpSkhbSVxNTk9KW1xdXl9VZmdoaWprbG1ub2JzdHV2d3h5ent8f/2gAMAwEAAhEDEQA/APVUkkklKSSSSUpJJJJSkkznNaJcYCA7JP5ojzKSmwkqhutP5yQutHdJVNtJAZkjh4jzCMCCJGoSUukkkkp//9D1VJJJJSkkkklKUXvDG7ipKre/c+OzfypKYPe55kpkkkkqSSSSUpSrsLD5dwopJKboIIkagp0DGfyw/EI6SH//0fVUlGyttjCx+rTygPwscMcQ0yASNSkpspKnj4lD6GPcCXESdSj1Y9VRJYInnUlJSVUSZJJ5KvKikkKSSSSUpJJJJSkkkklMqjFjT5x96uKnXrY34q4kh//S9VUbP5t3wP5FJRs/m3fA/kSUjxP6NX/VRkHE/o1f9VGSUpVLm7bD56j5q2h3V726fSHCSmqklwkklSSSSSlJJJNaXEAclJSXHbL93h/FWVFjAxoaPmpJIf/T9VUbP5t3wP5FJRs/m3fA/kSUjxP6NX/VRkHE/o1f9VGSUpJJJJSOylr9eHeKruqe3kaeIVxJJTRSV0taeQCkABwISTbVZS93aB4lWK62sGnPcqaSSFJJJJKf/9T1VRs/m3fA/kSc5rG7nEADklDfkUFjgLGzB7hJSsT+jV/1UZVsW+luOwOe0EDUEhE+04/+kb94SUlSQvtOP/pG/eEvtOP/AKRv3hJSVJC+04/+kb94S+04/wDpG/eElMrbG1VmxwkDwU1Uy76XY72te0kxAB81bSUpJJJJSkkkklP/1fVHNa4Q4Ag9jqo+hT/o2/cFNJJTD0Kf9G37gl6FP+jb9wU0klMPQp/0bfuCXoU/6Nv3BTSSUw9Cn/Rt+4JehT/o2/cFNJJTD0af9G37gppJJKUkkkkpSSSSSn//2ThCSU0EIQAAAAAAVQAAAAEBAAAADwBBAGQAbwBiAGUAIABQAGgAbwB0AG8AcwBoAG8AcAAAABMAQQBkAG8AYgBlACAAUABoAG8AdABvAHMAaABvAHAAIABDAFMAMwAAAAEAOEJJTQQGAAAAAAAHAAgAAAABAQD/4Q/QaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA0LjEtYzAzNiA0Ni4yNzY3MjAsIE1vbiBGZWIgMTkgMjAwNyAyMjoxMzo0MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4YXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhhcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iIGRjOmZvcm1hdD0iaW1hZ2UvanBlZyIgeGFwOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1MzIE1hY2ludG9zaCIgeGFwOkNyZWF0ZURhdGU9IjIwMTMtMDQtMDhUMDk6MzY6MjgrMDM6MDAiIHhhcDpNb2RpZnlEYXRlPSIyMDEzLTA0LTA4VDA5OjQzOjM0KzAzOjAwIiB4YXA6TWV0YWRhdGFEYXRlPSIyMDEzLTA0LTA4VDA5OjQzOjM0KzAzOjAwIiB4YXBNTTpEb2N1bWVudElEPSJ1dWlkOkIzRUI3RTBCQzJBMUUyMTE5RTRFQzExNDg5NjU1RjFGIiB4YXBNTTpJbnN0YW5jZUlEPSJ1dWlkOkI4OTg4NjA5QzNBMUUyMTE5RTRFQzExNDg5NjU1RjFGIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0ic1JHQiBJRUM2MTk2Ni0yLjEiIHBob3Rvc2hvcDpIaXN0b3J5PSIiIHRpZmY6T3JpZW50YXRpb249IjEiIHRpZmY6WFJlc29sdXRpb249Ijk2MDAwMC8xMDAwMCIgdGlmZjpZUmVzb2x1dGlvbj0iOTYwMDAwLzEwMDAwIiB0aWZmOlJlc29sdXRpb25Vbml0PSIyIiB0aWZmOk5hdGl2ZURpZ2VzdD0iMjU2LDI1NywyNTgsMjU5LDI2MiwyNzQsMjc3LDI4NCw1MzAsNTMxLDI4MiwyODMsMjk2LDMwMSwzMTgsMzE5LDUyOSw1MzIsMzA2LDI3MCwyNzEsMjcyLDMwNSwzMTUsMzM0MzI7NzczRjdDNTY4OTQ2MkIyOTlEODNCMUUxNzBFRTVEODYiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIxMDgiIGV4aWY6UGl4ZWxZRGltZW5zaW9uPSIxMDgiIGV4aWY6Q29sb3JTcGFjZT0iMSIgZXhpZjpOYXRpdmVEaWdlc3Q9IjM2ODY0LDQwOTYwLDQwOTYxLDM3MTIxLDM3MTIyLDQwOTYyLDQwOTYzLDM3NTEwLDQwOTY0LDM2ODY3LDM2ODY4LDMzNDM0LDMzNDM3LDM0ODUwLDM0ODUyLDM0ODU1LDM0ODU2LDM3Mzc3LDM3Mzc4LDM3Mzc5LDM3MzgwLDM3MzgxLDM3MzgyLDM3MzgzLDM3Mzg0LDM3Mzg1LDM3Mzg2LDM3Mzk2LDQxNDgzLDQxNDg0LDQxNDg2LDQxNDg3LDQxNDg4LDQxNDkyLDQxNDkzLDQxNDk1LDQxNzI4LDQxNzI5LDQxNzMwLDQxOTg1LDQxOTg2LDQxOTg3LDQxOTg4LDQxOTg5LDQxOTkwLDQxOTkxLDQxOTkyLDQxOTkzLDQxOTk0LDQxOTk1LDQxOTk2LDQyMDE2LDAsMiw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNSwxNiwxNywxOCwyMCwyMiwyMywyNCwyNSwyNiwyNywyOCwzMDtCRjI1N0VERDc4MjhDQTgyMkQ5NDAzNjU1RjFBRDhGOSI+IDx4YXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ1dWlkOkYzNEMxN0YwNTBBMUUyMTE5QTc3REVBNjVDRTUxODg1IiBzdFJlZjpkb2N1bWVudElEPSJ1dWlkOjY2OEFFRTdDNTBBMUUyMTE5QTc3REVBNjVDRTUxODg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDw/eHBhY2tldCBlbmQ9InciPz7/4gxYSUNDX1BST0ZJTEUAAQEAAAxITGlubwIQAABtbnRyUkdCIFhZWiAHzgACAAkABgAxAABhY3NwTVNGVAAAAABJRUMgc1JHQgAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLUhQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFjcHJ0AAABUAAAADNkZXNjAAABhAAAAGx3dHB0AAAB8AAAABRia3B0AAACBAAAABRyWFlaAAACGAAAABRnWFlaAAACLAAAABRiWFlaAAACQAAAABRkbW5kAAACVAAAAHBkbWRkAAACxAAAAIh2dWVkAAADTAAAAIZ2aWV3AAAD1AAAACRsdW1pAAAD+AAAABRtZWFzAAAEDAAAACR0ZWNoAAAEMAAAAAxyVFJDAAAEPAAACAxnVFJDAAAEPAAACAxiVFJDAAAEPAAACAx0ZXh0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";
+  const STORE = "olq-state-v1";
+  document.getElementById("logoTop").src = LOGO;
+  document.getElementById("logoDoc").src = LOGO;
+
+  // ---------- Form definition ----------
+  const client = { legend: "פרטי הלקוח", fields: [
+    { k: "client", label: "שם הלקוח/ות", ph: "לדוגמה: משפחת כהן" },
+    { k: "address", label: "כתובת הנכס", ph: "רחוב, עיר" },
+    { k: "date", label: "תאריך", num: true },
+  ] };
+  const FORM = {
+    tenant: [client,
+      { legend: "פרטי הפרויקט", fields: [
+        { row: [{ k: "sqm", label: "גודל הדירה (מ\"ר)", num: true }, { k: "project", label: "שם הפרויקט ועיר" }] },
+        { k: "baths", label: "חדרי רחצה לפריסות" },
+        { k: "carpentry", label: "פריטי נגרות", area: true },
+        { row: [{ k: "renders", label: "הדמיות גושניות", num: true }, { k: "visits", label: "ביקורי פיקוח", num: true }] },
+      ] },
+      { legend: "פגישות באולמות תצוגה", fields: [
+        { row: [{ k: "mTiles", label: "ריצוף וסניטריה", num: true }, { k: "mLight", label: "תאורה", num: true }, { k: "mKitchen", label: "מטבח ומשטחים", num: true }] },
+      ] },
+      { legend: "מחיר", fields: [
+        { row: [{ k: "fee", label: "שכר טרחה (₪, לפני מע\"מ)", num: true }, { k: "rate", label: "תעריף שעתי (₪)", num: true }] },
+        { check: "walls", label: "להוסיף סעיף תוספת על הזזת עד 2 קירות", dep: { k: "wallsFee", label: "סכום התוספת (₪)", num: true } },
+      ] },
+    ],
+    reno: [client,
+      { legend: "פרטי הפרויקט", fields: [
+        { row: [{ k: "scope", label: "מה משפצים" }, { k: "property", label: "סוג הנכס" }] },
+        { k: "measure", label: "מה מודדים בשלב א'" },
+        { k: "elev", label: "פריסות קירות עבור" },
+        { row: [{ k: "visits", label: "הגעות פיקוח", num: true }, { k: "hours", label: "שעות לפגישה", num: true }] },
+      ] },
+      { legend: "פגישות לבחירת חומרים (שלב ד')", fields: [
+        { row: [{ k: "mTiles", label: "קרמיקה וסניטריה", num: true }, { k: "mKitchen", label: "מטבח ומשטח", num: true }, { k: "mLight", label: "תאורה", num: true }] },
+      ] },
+      { legend: "מחיר לכל שלב (₪, לפני מע\"מ)", fields: [
+        { row: [{ k: "p1", label: "א' מדידות", num: true }, { k: "p2", label: "ב' סט קבלן", num: true }, { k: "p3", label: "ג' נגרות", num: true }] },
+        { row: [{ k: "p4", label: "ד' פגישות", num: true }, { k: "p5", label: "ה' פיקוח", num: true }, { k: "rate", label: "תעריף שעתי", num: true }] },
+        { total: true },
+      ] },
+    ],
+    permit: [client,
+      { legend: "פרטי הבקשה", fields: [
+        { row: [{ k: "permitKind", label: "היתר עבור" }, { k: "building", label: "סוג המבנה" }] },
+        { k: "work", label: "תיאור העבודה", area: true },
+        { check: "gramOther", label: "הגרמושקה הוכנה ע\"י אדריכל אחר", dep: { k: "gramBy", label: "שם האדריכל" } },
+        { check: "existing", label: "הבנייה כבר בוצעה בפועל (מוסיף סעיפי הגנה)", dep: { k: "existingWhat", label: "מה כבר נבנה" } },
+      ] },
+      { legend: "מחיר", fields: [
+        { row: [{ k: "fee", label: "שכר טרחה (₪, לפני מע\"מ)", num: true }, { k: "rate", label: "תעריף שעתי (₪)", num: true }] },
+      ] },
+    ],
+  };
+
+  // ---------- State ----------
+  let all = { type: "tenant", byType: {} };
+  try { const saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved && saved.byType) all = saved; } catch (e) {}
+  const S = () => (all.byType[all.type] ||= Q.defaults(all.type));
+  const save = () => { try { localStorage.setItem(STORE, JSON.stringify(all)); } catch (e) {} };
+
+  // ---------- Rendering ----------
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const input = (f, s) => {
+    const id = `f-${f.k}`;
+    const ctl = f.area
+      ? `<textarea id="${id}" data-k="${f.k}" rows="2">${esc(s[f.k])}</textarea>`
+      : `<input type="text" id="${id}" data-k="${f.k}" value="${esc(s[f.k])}"${f.num ? ' class="num" inputmode="decimal"' : ""}${f.ph ? ` placeholder="${esc(f.ph)}"` : ""}>`;
+    return `<label class="f" for="${id}">${esc(f.label)}${ctl}</label>`;
+  };
+
+  function renderTypes() {
+    document.getElementById("types").innerHTML = Object.entries(Q.TYPES).map(([k, name]) =>
+      `<button type="button" data-type="${k}" aria-pressed="${k === all.type}">${name}</button>`).join("");
+  }
+
+  function renderForm() {
+    const s = S();
+    const html = FORM[all.type].map((g) => `<fieldset><legend>${esc(g.legend)}</legend>${g.fields.map((f) => {
+      if (f.row) return `<div class="row">${f.row.map((x) => input(x, s)).join("")}</div>`;
+      if (f.check) return `<label class="chk"><input type="checkbox" id="f-${f.check}" data-k="${f.check}"${s[f.check] ? " checked" : ""}><span>${esc(f.label)}</span></label>${s[f.check] ? input(f.dep, s) : ""}`;
+      if (f.total) return `<p class="hint" id="renoTotal"></p>`;
+      return input(f, s);
+    }).join("")}</fieldset>`).join("")
+    + `<fieldset><legend>חלוקת התשלומים</legend><div class="pay" id="pay"></div>
+        <div class="pay-foot"><button type="button" class="btn small" id="addPay">+ הוספת שורה</button><span id="paySum"></span></div></fieldset>
+       <fieldset><legend>הערות נוספות</legend>
+        <label class="f" for="f-extraNotes">כל שורה תתווסף כסעיף בפרק "הערות ותנאים כלליים"
+          <textarea id="f-extraNotes" data-k="extraNotes" rows="3" placeholder="לדוגמה: ההצעה בתוקף ל-30 יום.">${esc(s.extraNotes)}</textarea></label>
+       </fieldset>`;
+    document.getElementById("fields").innerHTML = html;
+    renderPay();
+  }
+
+  function renderPay() {
+    const s = S();
+    document.getElementById("pay").innerHTML = s.payments.map((r, i) => `
+      <div class="pay-row">
+        <input type="text" class="num" inputmode="decimal" id="pp-${i}" data-pay="${i}" data-f="pct" value="${esc(r.pct)}" aria-label="אחוז, שורה ${i + 1}">
+        <input type="text" id="pl-${i}" data-pay="${i}" data-f="label" value="${esc(r.label)}" aria-label="אבן דרך, שורה ${i + 1}">
+        <button type="button" class="x" data-del="${i}" aria-label="מחיקת שורה ${i + 1}">✕</button>
+      </div>`).join("");
+  }
+
+  function refresh() {
+    const s = S();
+    const blocks = Q.model(s);
+    document.getElementById("doc").innerHTML = Q.toHTML(blocks);
+    const sum = Q.pctSum(s), miss = Q.missingCount(blocks), T = Q.total(s);
+    const ps = document.getElementById("paySum");
+    ps.className = `chip ${sum === 100 ? "ok" : "warn"}`;
+    ps.textContent = sum === 100 ? "סה\"כ 100% ✓" : `סה"כ ${sum}% · צריך 100%`;
+    const rt = document.getElementById("renoTotal");
+    if (rt) rt.textContent = `סה"כ שכר טרחה: ${Q.fmt(T)} ₪ + מע"מ`;
+    document.getElementById("status").innerHTML =
+      `<span class="chip ${miss ? "warn" : "ok"}">${miss ? `${miss} שדות חסרים` : "כל השדות מולאו ✓"}</span>` +
+      `<span class="chip ${sum === 100 ? "ok" : "warn"}">תשלומים ${sum}%</span>` +
+      `<span class="chip ok">${Q.fmt(T)} ₪ + מע"מ</span>`;
+    save();
+  }
+
+  function full() { renderTypes(); renderForm(); refresh(); }
+
+  // ---------- Events ----------
+  document.getElementById("types").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-type]"); if (!b) return;
+    const prev = S();
+    all.type = b.dataset.type;
+    const next = S();
+    for (const k of ["client", "address", "date"]) if (prev[k]) next[k] = prev[k]; // same client across types
+    resetArmed = false; setMsg(""); full();
+  });
+  const form = document.getElementById("form");
+  form.addEventListener("submit", (e) => e.preventDefault());
+  form.addEventListener("input", (e) => {
+    const t = e.target, s = S();
+    if (t.dataset.pay !== undefined) { s.payments[+t.dataset.pay][t.dataset.f] = t.value; return refresh(); }
+    if (t.dataset.k && t.type !== "checkbox") { s[t.dataset.k] = t.value; refresh(); }
+  });
+  form.addEventListener("change", (e) => {
+    const t = e.target;
+    if (t.type === "checkbox" && t.dataset.k) { S()[t.dataset.k] = t.checked; renderForm(); refresh(); document.getElementById(t.id)?.focus(); }
+  });
+  form.addEventListener("click", (e) => {
+    const s = S();
+    if (e.target.id === "addPay") { s.payments.push({ pct: "", label: "" }); renderPay(); refresh(); document.getElementById(`pp-${s.payments.length - 1}`)?.focus(); }
+    const del = e.target.closest("[data-del]");
+    if (del) { s.payments.splice(+del.dataset.del, 1); renderPay(); refresh(); }
+  });
+
+  let resetArmed = false;
+  const resetBtn = document.getElementById("reset");
+  resetBtn.addEventListener("click", () => {
+    if (!resetArmed) { resetArmed = true; resetBtn.textContent = "לחצו שוב לאישור"; setMsg("האיפוס מחזיר את ערכי הדוגמה ומוחק את מה שמולא בסוג הצעה זה."); return; }
+    resetArmed = false; resetBtn.textContent = "איפוס";
+    all.byType[all.type] = Q.defaults(all.type); setMsg("הטופס אופס.", "good"); full();
+  });
+
+  const msg = document.getElementById("msg");
+  function setMsg(t, cls = "") { msg.textContent = t; msg.className = `msg ${cls}`; if (!t || cls) { resetBtn.textContent = "איפוס"; } }
+
+  // ---------- Download ----------
+  const dlBtn = document.getElementById("dl");
+  let downloads = null;
+  const ready = window.claude?.use ? window.claude.use("downloads").then((d) => (downloads = d)).catch(() => null) : Promise.resolve(null);
+  const logoBytes = () => Uint8Array.from(atob(LOGO.split(",")[1]), (c) => c.charCodeAt(0));
+
+  dlBtn.addEventListener("click", async () => {
+    resetArmed = false; resetBtn.textContent = "איפוס";
+    if (!window.docx) return setMsg("רכיב יצירת קובץ ה-Word לא נטען. כדאי לרענן את הדף ולנסות שוב.", "err");
+    await ready;
+    if (!downloads) return setMsg("ההורדה לא זמינה בתצוגה הזאת. פתחו את הדף ב-claude.ai כדי להוריד את הקובץ.", "err");
+    const s = S();
+    dlBtn.disabled = true; setMsg("מכינה את הקובץ…");
+    try {
+      const blob = await window.docx.Packer.toBlob(Q.toDocx(Q.model(s), window.docx, logoBytes()));
+      await downloads.save({ filename: Q.filename(s), data: blob });
+      const miss = Q.missingCount(Q.model(s));
+      setMsg(miss ? `הקובץ נשמר. שימו לב: ${miss} שדות חסרים מסומנים בו בצהוב.` : "הקובץ נשמר.", "good");
+    } catch (err) {
+      const code = err && err.code;
+      if (code === "declined") setMsg("ההורדה בוטלה.");
+      else if (code === "rate_limited") setMsg("חלון הורדה אחר עדיין פתוח. נסו שוב בעוד רגע.", "err");
+      else setMsg("לא הצלחתי לשמור את הקובץ. נסו שוב, ואם זה חוזר – רעננו את הדף.", "err");
+    } finally { dlBtn.disabled = false; }
+  });
+
+  full();
+})();
+</script>

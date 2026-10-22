@@ -1,0 +1,342 @@
+<title>הצעות מחיר Orit Lev</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+<style>
+/* Layout: form column on the right (RTL) + live paper preview; stacks on phones */
+:root {
+  --bg: #ECEAE7; --panel: #FFFFFF; --ink: #2A2624; --muted: #776E68; --line: #DCD6D1;
+  --accent: #6E625A; --accent-ink: #FFFFFF; --soft: #F4F1EE; --warn: #A4471F; --ok: #3F6F4E;
+  --paper: #FFFFFF; --paper-ink: #222222; --paper-muted: #8C8C8C; --paper-line: #C9C2BC; --paper-shade: #F3F0ED; --mark: #FFEF5C;
+  --f-body: "Assistant", "Segoe UI", Arial, sans-serif;
+  --f-display: "Frank Ruhl Libre", "David", Georgia, serif;
+  --f-doc: Arial, "Helvetica Neue", sans-serif;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1A1817; --panel: #242120; --ink: #EDE8E4; --muted: #A79E97; --line: #3A3532;
+  --accent: #CDBDB0; --accent-ink: #1A1817; --soft: #2C2826; --warn: #E8946C; --ok: #8CC59D; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #1A1817; --panel: #242120; --ink: #EDE8E4; --muted: #A79E97; --line: #3A3532;
+  --accent: #CDBDB0; --accent-ink: #1A1817; --soft: #2C2826; --warn: #E8946C; --ok: #8CC59D; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { direction: rtl; max-width: 1320px; margin: 0 auto; padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header.top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+header.top img { width: 44px; height: 44px; border-radius: 6px; }
+header.top h1 { font-family: var(--f-display); font-weight: 700; font-size: 1.6rem; margin: 0; text-wrap: balance; }
+header.top .sub { color: var(--muted); font-size: .9rem; }
+.brand { display: flex; align-items: center; gap: 12px; margin-inline-end: auto; }
+
+.types { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.types button { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--ink); padding: 7px 16px; border-radius: 999px; cursor: pointer; }
+.types button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.types button:focus-visible, .btn:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+.form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+fieldset { margin: 0; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); padding: 14px 16px 16px; display: grid; gap: 12px; min-width: 0; }
+legend { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; padding: 0 6px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+label.f { display: grid; gap: 4px; font-size: .88rem; color: var(--muted); font-weight: 600; min-width: 0; }
+input[type=text], textarea { font: inherit; color: var(--ink); background: var(--soft); border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; width: 100%; min-width: 0; }
+textarea { min-height: 64px; resize: vertical; }
+input.num { font-variant-numeric: tabular-nums; direction: ltr; text-align: right; }
+label.chk { display: flex; gap: 8px; align-items: flex-start; font-weight: 600; cursor: pointer; }
+label.chk input { margin-top: 4px; accent-color: var(--accent); width: 17px; height: 17px; }
+.hint { font-size: .82rem; color: var(--muted); margin: 0; }
+.example { font-size: .85rem; color: var(--muted); background: var(--panel); border: 1px dashed var(--line); border-radius: var(--r); padding: 10px 14px; margin: 0; }
+
+.pay { display: grid; gap: 8px; }
+.pay-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) 32px; gap: 6px; align-items: center; }
+.pay-row .x { font: inherit; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 7px; height: 36px; cursor: pointer; }
+.pay-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+.chip.ok { color: var(--ok); } .chip.warn { color: var(--warn); }
+
+.btn { font: inherit; font-weight: 700; border-radius: 8px; padding: 10px 18px; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.small { padding: 5px 12px; font-size: .88rem; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.actions { position: sticky; bottom: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 10px; box-shadow: 0 -6px 18px rgba(0,0,0,.06); }
+.actions .status { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.actions .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions .btns .primary { flex: 1; }
+.msg { font-size: .88rem; min-height: 1.2em; margin: 0; color: var(--muted); }
+.msg.err { color: var(--warn); } .msg.good { color: var(--ok); }
+
+/* ---- Paper preview (always light, like the printed document) ---- */
+.preview { min-width: 0; position: sticky; top: calc(12px + env(safe-area-inset-top, 0px)); }
+.preview .cap { font-size: .85rem; color: var(--muted); margin: 0 0 8px; }
+.paper { background: var(--paper); color: var(--paper-ink); font-family: var(--f-doc); font-size: 13.5px; line-height: 1.55; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 30px rgba(0,0,0,.08); padding: 28px clamp(18px, 5%, 56px) 22px; max-height: calc(100vh - 110px); overflow: auto; }
+@media (max-width: 900px) { .preview { position: static; } .paper { max-height: none; } }
+.p-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--paper-line); padding-bottom: 6px; margin-bottom: 18px; }
+.p-head span { color: #6E625A; letter-spacing: .12em; font-size: 12px; direction: ltr; }
+.p-head img { width: 38px; height: 38px; }
+.p-foot { border-top: 1px solid var(--paper-line); margin-top: 26px; padding-top: 6px; text-align: center; color: var(--paper-muted); font-size: 10.5px; direction: ltr; }
+.paper p { margin: 0 0 7px; }
+.paper mark { background: var(--mark); color: inherit; padding: 0 2px; }
+.q-meta { margin: 0 0 2px !important; } .q-meta.last { margin-bottom: 18px !important; }
+.q-title { font-size: 19px; color: #6E625A; text-align: center; margin: 0 0 18px; text-wrap: balance; font-weight: 700; }
+.q-sec { font-size: 15.5px; color: #6E625A; border-bottom: 1px solid var(--paper-line); padding-bottom: 3px; margin: 22px 0 9px; }
+.q-stage { font-size: 14px; margin: 14px 0 5px; }
+.q-note { font-style: italic; color: var(--paper-muted); font-size: 12px; }
+.q-price { padding-inline-start: 22px; margin-top: 4px !important; }
+.q-list { margin: 0 0 8px; padding-inline-start: 22px; }
+.q-list li { margin-bottom: 3px; } .q-list li::marker { color: #6E625A; }
+.q-list li.lvl1 { margin-inline-start: 26px; list-style-type: circle; }
+.q-num { margin: 0 0 8px; padding-inline-start: 24px; } .q-num li { margin-bottom: 5px; } .q-num li::marker { color: #6E625A; }
+.q-table-wrap { overflow-x: auto; margin: 6px 0; }
+.q-table { border-collapse: collapse; width: 100%; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.q-table th, .q-table td { border: 1px solid var(--paper-line); padding: 5px 8px; text-align: right; }
+.q-table th, .q-table tr.total td { background: var(--paper-shade); font-weight: 700; }
+.q-table td:first-child, .q-table th:first-child { text-align: center; width: 6%; }
+.q-sign { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; text-align: center; font-size: 12px; }
+.q-sign span { display: block; border-top: 1px solid var(--paper-muted); margin-bottom: 4px; }
+.q-sign-h { margin-top: 20px !important; }
+.q-close { margin-top: 18px !important; }
+.q-close b { color: #6E625A; }
+@media (prefers-reduced-motion: no-preference) { .types button, .btn { transition: background .15s, color .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <img id="logoTop" alt="">
+      <div>
+        <h1>הצעות מחיר</h1>
+        <div class="sub">Orit Lev Architect · ממלאים פרטים, מורידים קובץ Word מוכן</div>
+      </div>
+    </div>
+    <div class="types" role="group" aria-label="סוג ההצעה" id="types"></div>
+  </header>
+
+  <div class="grid">
+    <form class="form" id="form" autocomplete="off">
+      <p class="example" id="exampleNote">הערכים שמופיעים בהתחלה לקוחים מהצעה קודמת לדוגמה. מחליפים אותם בפרטי הלקוח הנוכחי.</p>
+      <div id="fields"></div>
+      <div class="actions">
+        <div class="status" id="status"></div>
+        <div class="btns">
+          <button type="button" class="btn primary" id="dl">הורדת קובץ Word</button>
+          <button type="button" class="btn" id="reset">איפוס</button>
+        </div>
+        <p class="msg" id="msg" role="status"></p>
+      </div>
+    </form>
+
+    <section class="preview" aria-label="תצוגה מקדימה">
+      <p class="cap">תצוגה מקדימה · מה שמסומן בצהוב עדיין חסר</p>
+      <div class="paper" dir="rtl">
+        <div class="p-head"><span>Orit Lev Architect</span><img id="logoDoc" alt=""></div>
+        <div id="doc"></div>
+        <div class="p-foot">Orit Lev Architect &nbsp;|&nbsp; Tel: 03.5100885 / 054.397.2392 &nbsp;|&nbsp; oritlev.arch@gmail.com</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/docx@9.7.1/dist/index.iife.js"></script>
+<script>
+/*__CORE__*/
+</script>
+<script>
+(() => {
+  const Q = window.QuoteCore;
+  const LOGO = "__LOGO__";
+  const STORE = "olq-state-v1";
+  document.getElementById("logoTop").src = LOGO;
+  document.getElementById("logoDoc").src = LOGO;
+
+  // ---------- Form definition ----------
+  const client = { legend: "פרטי הלקוח", fields: [
+    { k: "client", label: "שם הלקוח/ות", ph: "לדוגמה: משפחת כהן" },
+    { k: "address", label: "כתובת הנכס", ph: "רחוב, עיר" },
+    { k: "date", label: "תאריך", num: true },
+  ] };
+  const FORM = {
+    tenant: [client,
+      { legend: "פרטי הפרויקט", fields: [
+        { row: [{ k: "sqm", label: "גודל הדירה (מ\"ר)", num: true }, { k: "project", label: "שם הפרויקט ועיר" }] },
+        { k: "baths", label: "חדרי רחצה לפריסות" },
+        { k: "carpentry", label: "פריטי נגרות", area: true },
+        { row: [{ k: "renders", label: "הדמיות גושניות", num: true }, { k: "visits", label: "ביקורי פיקוח", num: true }] },
+      ] },
+      { legend: "פגישות באולמות תצוגה", fields: [
+        { row: [{ k: "mTiles", label: "ריצוף וסניטריה", num: true }, { k: "mLight", label: "תאורה", num: true }, { k: "mKitchen", label: "מטבח ומשטחים", num: true }] },
+      ] },
+      { legend: "מחיר", fields: [
+        { row: [{ k: "fee", label: "שכר טרחה (₪, לפני מע\"מ)", num: true }, { k: "rate", label: "תעריף שעתי (₪)", num: true }] },
+        { check: "walls", label: "להוסיף סעיף תוספת על הזזת עד 2 קירות", dep: { k: "wallsFee", label: "סכום התוספת (₪)", num: true } },
+      ] },
+    ],
+    reno: [client,
+      { legend: "פרטי הפרויקט", fields: [
+        { row: [{ k: "scope", label: "מה משפצים" }, { k: "property", label: "סוג הנכס" }] },
+        { k: "measure", label: "מה מודדים בשלב א'" },
+        { k: "elev", label: "פריסות קירות עבור" },
+        { row: [{ k: "visits", label: "הגעות פיקוח", num: true }, { k: "hours", label: "שעות לפגישה", num: true }] },
+      ] },
+      { legend: "פגישות לבחירת חומרים (שלב ד')", fields: [
+        { row: [{ k: "mTiles", label: "קרמיקה וסניטריה", num: true }, { k: "mKitchen", label: "מטבח ומשטח", num: true }, { k: "mLight", label: "תאורה", num: true }] },
+      ] },
+      { legend: "מחיר לכל שלב (₪, לפני מע\"מ)", fields: [
+        { row: [{ k: "p1", label: "א' מדידות", num: true }, { k: "p2", label: "ב' סט קבלן", num: true }, { k: "p3", label: "ג' נגרות", num: true }] },
+        { row: [{ k: "p4", label: "ד' פגישות", num: true }, { k: "p5", label: "ה' פיקוח", num: true }, { k: "rate", label: "תעריף שעתי", num: true }] },
+        { total: true },
+      ] },
+    ],
+    permit: [client,
+      { legend: "פרטי הבקשה", fields: [
+        { row: [{ k: "permitKind", label: "היתר עבור" }, { k: "building", label: "סוג המבנה" }] },
+        { k: "work", label: "תיאור העבודה", area: true },
+        { check: "gramOther", label: "הגרמושקה הוכנה ע\"י אדריכל אחר", dep: { k: "gramBy", label: "שם האדריכל" } },
+        { check: "existing", label: "הבנייה כבר בוצעה בפועל (מוסיף סעיפי הגנה)", dep: { k: "existingWhat", label: "מה כבר נבנה" } },
+      ] },
+      { legend: "מחיר", fields: [
+        { row: [{ k: "fee", label: "שכר טרחה (₪, לפני מע\"מ)", num: true }, { k: "rate", label: "תעריף שעתי (₪)", num: true }] },
+      ] },
+    ],
+  };
+
+  // ---------- State ----------
+  let all = { type: "tenant", byType: {} };
+  try { const saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved && saved.byType) all = saved; } catch (e) {}
+  const S = () => (all.byType[all.type] ||= Q.defaults(all.type));
+  const save = () => { try { localStorage.setItem(STORE, JSON.stringify(all)); } catch (e) {} };
+
+  // ---------- Rendering ----------
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const input = (f, s) => {
+    const id = `f-${f.k}`;
+    const ctl = f.area
+      ? `<textarea id="${id}" data-k="${f.k}" rows="2">${esc(s[f.k])}</textarea>`
+      : `<input type="text" id="${id}" data-k="${f.k}" value="${esc(s[f.k])}"${f.num ? ' class="num" inputmode="decimal"' : ""}${f.ph ? ` placeholder="${esc(f.ph)}"` : ""}>`;
+    return `<label class="f" for="${id}">${esc(f.label)}${ctl}</label>`;
+  };
+
+  function renderTypes() {
+    document.getElementById("types").innerHTML = Object.entries(Q.TYPES).map(([k, name]) =>
+      `<button type="button" data-type="${k}" aria-pressed="${k === all.type}">${name}</button>`).join("");
+  }
+
+  function renderForm() {
+    const s = S();
+    const html = FORM[all.type].map((g) => `<fieldset><legend>${esc(g.legend)}</legend>${g.fields.map((f) => {
+      if (f.row) return `<div class="row">${f.row.map((x) => input(x, s)).join("")}</div>`;
+      if (f.check) return `<label class="chk"><input type="checkbox" id="f-${f.check}" data-k="${f.check}"${s[f.check] ? " checked" : ""}><span>${esc(f.label)}</span></label>${s[f.check] ? input(f.dep, s) : ""}`;
+      if (f.total) return `<p class="hint" id="renoTotal"></p>`;
+      return input(f, s);
+    }).join("")}</fieldset>`).join("")
+    + `<fieldset><legend>חלוקת התשלומים</legend><div class="pay" id="pay"></div>
+        <div class="pay-foot"><button type="button" class="btn small" id="addPay">+ הוספת שורה</button><span id="paySum"></span></div></fieldset>
+       <fieldset><legend>הערות נוספות</legend>
+        <label class="f" for="f-extraNotes">כל שורה תתווסף כסעיף בפרק "הערות ותנאים כלליים"
+          <textarea id="f-extraNotes" data-k="extraNotes" rows="3" placeholder="לדוגמה: ההצעה בתוקף ל-30 יום.">${esc(s.extraNotes)}</textarea></label>
+       </fieldset>`;
+    document.getElementById("fields").innerHTML = html;
+    renderPay();
+  }
+
+  function renderPay() {
+    const s = S();
+    document.getElementById("pay").innerHTML = s.payments.map((r, i) => `
+      <div class="pay-row">
+        <input type="text" class="num" inputmode="decimal" id="pp-${i}" data-pay="${i}" data-f="pct" value="${esc(r.pct)}" aria-label="אחוז, שורה ${i + 1}">
+        <input type="text" id="pl-${i}" data-pay="${i}" data-f="label" value="${esc(r.label)}" aria-label="אבן דרך, שורה ${i + 1}">
+        <button type="button" class="x" data-del="${i}" aria-label="מחיקת שורה ${i + 1}">✕</button>
+      </div>`).join("");
+  }
+
+  function refresh() {
+    const s = S();
+    const blocks = Q.model(s);
+    document.getElementById("doc").innerHTML = Q.toHTML(blocks);
+    const sum = Q.pctSum(s), miss = Q.missingCount(blocks), T = Q.total(s);
+    const ps = document.getElementById("paySum");
+    ps.className = `chip ${sum === 100 ? "ok" : "warn"}`;
+    ps.textContent = sum === 100 ? "סה\"כ 100% ✓" : `סה"כ ${sum}% · צריך 100%`;
+    const rt = document.getElementById("renoTotal");
+    if (rt) rt.textContent = `סה"כ שכר טרחה: ${Q.fmt(T)} ₪ + מע"מ`;
+    document.getElementById("status").innerHTML =
+      `<span class="chip ${miss ? "warn" : "ok"}">${miss ? `${miss} שדות חסרים` : "כל השדות מולאו ✓"}</span>` +
+      `<span class="chip ${sum === 100 ? "ok" : "warn"}">תשלומים ${sum}%</span>` +
+      `<span class="chip ok">${Q.fmt(T)} ₪ + מע"מ</span>`;
+    save();
+  }
+
+  function full() { renderTypes(); renderForm(); refresh(); }
+
+  // ---------- Events ----------
+  document.getElementById("types").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-type]"); if (!b) return;
+    const prev = S();
+    all.type = b.dataset.type;
+    const next = S();
+    for (const k of ["client", "address", "date"]) if (prev[k]) next[k] = prev[k]; // same client across types
+    resetArmed = false; setMsg(""); full();
+  });
+  const form = document.getElementById("form");
+  form.addEventListener("submit", (e) => e.preventDefault());
+  form.addEventListener("input", (e) => {
+    const t = e.target, s = S();
+    if (t.dataset.pay !== undefined) { s.payments[+t.dataset.pay][t.dataset.f] = t.value; return refresh(); }
+    if (t.dataset.k && t.type !== "checkbox") { s[t.dataset.k] = t.value; refresh(); }
+  });
+  form.addEventListener("change", (e) => {
+    const t = e.target;
+    if (t.type === "checkbox" && t.dataset.k) { S()[t.dataset.k] = t.checked; renderForm(); refresh(); document.getElementById(t.id)?.focus(); }
+  });
+  form.addEventListener("click", (e) => {
+    const s = S();
+    if (e.target.id === "addPay") { s.payments.push({ pct: "", label: "" }); renderPay(); refresh(); document.getElementById(`pp-${s.payments.length - 1}`)?.focus(); }
+    const del = e.target.closest("[data-del]");
+    if (del) { s.payments.splice(+del.dataset.del, 1); renderPay(); refresh(); }
+  });
+
+  let resetArmed = false;
+  const resetBtn = document.getElementById("reset");
+  resetBtn.addEventListener("click", () => {
+    if (!resetArmed) { resetArmed = true; resetBtn.textContent = "לחצו שוב לאישור"; setMsg("האיפוס מחזיר את ערכי הדוגמה ומוחק את מה שמולא בסוג הצעה זה."); return; }
+    resetArmed = false; resetBtn.textContent = "איפוס";
+    all.byType[all.type] = Q.defaults(all.type); setMsg("הטופס אופס.", "good"); full();
+  });
+
+  const msg = document.getElementById("msg");
+  function setMsg(t, cls = "") { msg.textContent = t; msg.className = `msg ${cls}`; if (!t || cls) { resetBtn.textContent = "איפוס"; } }
+
+  // ---------- Download ----------
+  const dlBtn = document.getElementById("dl");
+  let downloads = null;
+  const ready = window.claude?.use ? window.claude.use("downloads").then((d) => (downloads = d)).catch(() => null) : Promise.resolve(null);
+  const logoBytes = () => Uint8Array.from(atob(LOGO.split(",")[1]), (c) => c.charCodeAt(0));
+
+  dlBtn.addEventListener("click", async () => {
+    resetArmed = false; resetBtn.textContent = "איפוס";
+    if (!window.docx) return setMsg("רכיב יצירת קובץ ה-Word לא נטען. כדאי לרענן את הדף ולנסות שוב.", "err");
+    await ready;
+    if (!downloads) return setMsg("ההורדה לא זמינה בתצוגה הזאת. פתחו את הדף ב-claude.ai כדי להוריד את הקובץ.", "err");
+    const s = S();
+    dlBtn.disabled = true; setMsg("מכינה את הקובץ…");
+    try {
+      const blob = await window.docx.Packer.toBlob(Q.toDocx(Q.model(s), window.docx, logoBytes()));
+      await downloads.save({ filename: Q.filename(s), data: blob });
+      const miss = Q.missingCount(Q.model(s));
+      setMsg(miss ? `הקובץ נשמר. שימו לב: ${miss} שדות חסרים מסומנים בו בצהוב.` : "הקובץ נשמר.", "good");
+    } catch (err) {
+      const code = err && err.code;
+      if (code === "declined") setMsg("ההורדה בוטלה.");
+      else if (code === "rate_limited") setMsg("חלון הורדה אחר עדיין פתוח. נסו שוב בעוד רגע.", "err");
+      else setMsg("לא הצלחתי לשמור את הקובץ. נסו שוב, ואם זה חוזר – רעננו את הדף.", "err");
+    } finally { dlBtn.disabled = false; }
+  });
+
+  full();
+})();
+</script>
