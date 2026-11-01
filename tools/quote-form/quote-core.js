@@ -397,7 +397,7 @@
                   width: { size: b.widths[ci], type: D.WidthType.DXA },
                   shading: shade ? { fill: SHADE, type: D.ShadingType.CLEAR, color: "auto" } : undefined,
                   margins: { top: 80, bottom: 80, left: 120, right: 120 }, verticalAlign: D.VerticalAlign.CENTER,
-                  children: [para(c, { spacing: { after: 0 }, alignment: ci === 0 ? D.AlignmentType.CENTER : undefined }, { bold: shade, size: 21 })],
+                  children: [para(c, { spacing: { after: 0 }, keepNext: ri < b.rows.length - 1, alignment: ci === 0 ? D.AlignmentType.CENTER : undefined }, { bold: shade, size: 21 })], // keepNext: table stays on one page
                 })),
               });
             }),
