@@ -333,7 +333,7 @@
         case "title": out.push(`<h1 class="q-title">${html(b.text)}</h1>`); break;
         case "section": out.push(`<h2 class="q-sec">${html(b.text)}</h2>`); break;
         case "stage": out.push(`<h3 class="q-stage">${html(b.text)}</h3>`); break;
-        case "p": out.push(`<p>${html(b.text)}</p>`); break;
+        case "p": out.push(`<p${b.center ? ' style="text-align:center"' : ""}>${html(b.text)}</p>`); break;
         case "note": out.push(`<p class="q-note">${html(b.text)}</p>`); break;
         case "price": out.push(`<p class="q-price">${html(b.text)}</p>`); break;
         case "bullet":
@@ -347,7 +347,7 @@
             return `<tr${cls}>${r.map((c) => `<${tag}>${html(c)}</${tag}>`).join("")}</tr>`;
           }).join("")}</table></div>`); break;
         case "sign":
-          out.push(`<p class="q-sign-h"><b>ובזאת באו הצדדים על החתום:</b></p><div class="q-sign">${["חתימת המזמין/ים", "תאריך", "חתימת המתכננת"].map((t) => `<div><span></span>${t}</div>`).join("")}</div>`); break;
+          out.push(`<p class="q-sign-h"><b>${esc(b.heading || "ובזאת באו הצדדים על החתום:")}</b></p><div class="q-sign">${(b.labels || ["חתימת המזמין/ים", "תאריך", "חתימת המתכננת"]).map((t) => `<div><span></span>${t}</div>`).join("")}</div>`); break;
         case "closing":
           out.push(`<p class="q-close">אשמח לעמוד לרשותכם בכל שאלה.<br>בברכה,<br><b>Orit Lev Architect</b></p>`); break;
       }
@@ -380,7 +380,7 @@
         case "section": kids.push(para(b.text, { keepNext: true, spacing: { before: 360, after: 140 },
           border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: LINE, space: 4 } } }, { bold: true, size: 26, color: ACCENT })); break;
         case "stage": kids.push(para(b.text, { keepNext: true, spacing: { before: 220, after: 80 } }, { bold: true, size: 23 })); break;
-        case "p": kids.push(para(b.text, b.before ? { spacing: { before: b.before, after: 100 } } : {})); break;
+        case "p": kids.push(para(b.text, { ...(b.before ? { spacing: { before: b.before, after: 100 } } : {}), ...(b.center ? { alignment: D.AlignmentType.CENTER, spacing: { after: 300 } } : {}) })); break;
         case "note": kids.push(para(b.text, { spacing: { after: 80 } }, { italics: true, color: MUTED, size: 20 })); break;
         case "price": kids.push(para(b.text, { spacing: { before: 60, after: 120 }, indent: { start: 360 } })); break;
         case "bullet": kids.push(para(b.text, { numbering: { reference: "bul", level: b.level }, spacing: { after: 60, line: 290 } })); break;
@@ -403,15 +403,16 @@
             }),
           })); break;
         case "sign": {
-          const w = [3212, 3213, 3213];
+          const labels = b.labels || ["חתימת המזמין/ים", "תאריך", "חתימת המתכננת"];
+          const w = labels.map(() => Math.floor(CW / labels.length));
           const cell = (t) => new D.TableCell({
             borders: cellNoB, width: { size: w[0], type: D.WidthType.DXA },
-            children: [para("_____________________", { alignment: D.AlignmentType.CENTER, spacing: { before: 440, after: 40 } }, { color: MUTED }),
+            children: [para("_".repeat(labels.length > 3 ? 14 : 21), { alignment: D.AlignmentType.CENTER, spacing: { before: 440, after: 40 } }, { color: MUTED }),
               para(t, { alignment: D.AlignmentType.CENTER }, { size: 20 })],
           });
-          kids.push(para("ובזאת באו הצדדים על החתום:", { spacing: { before: 280, after: 0 }, keepNext: true }, { bold: true }));
+          kids.push(para(b.heading || "ובזאת באו הצדדים על החתום:", { spacing: { before: 280, after: 0 }, keepNext: true }, { bold: true }));
           kids.push(new D.Table({ visuallyRightToLeft: true, borders: noBorders, width: { size: CW, type: D.WidthType.DXA }, columnWidths: w,
-            rows: [new D.TableRow({ cantSplit: true, children: [cell("חתימת המזמין/ים"), cell("תאריך"), cell("חתימת המתכננת")] })] }));
+            rows: [new D.TableRow({ cantSplit: true, children: labels.map(cell) })] }));
           break;
         }
         case "closing":
